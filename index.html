@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RenewGP — Vehicle Licensing &amp; Registration Services, Johannesburg</title>
-<meta name="description" content="RenewGP handles license disc renewals, vehicle registrations, traffic fines, number plates and more — so you don't have to queue.">
+<title>RenewGP | Vehicle Licensing &amp; Registration Services in Boksburg, Gauteng</title>
+<meta name="description" content="Need help with vehicle paperwork? RenewGP assists with licence disc renewals, registration, ownership changes, number plates, traffic fines and more across Gauteng. We queue. You cruise.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -70,6 +74,17 @@
     width:auto;
     display:block;
   }
+  .logo-text{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--paper);
+    letter-spacing:0.01em;
+    gap:0;
+  }
+  .logo-gp{
+    color:var(--gold);
+  }
   nav ul{
     list-style:none;display:flex;gap:32px;margin:0;padding:0;
   }
@@ -117,11 +132,6 @@
     display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
   }
   @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero-logo{
-    height:56px;
-    width:auto;
-    margin-bottom:26px;
-  }
   .eyebrow-line{
     display:flex;align-items:center;gap:10px;
     color:var(--gold-light);
@@ -167,32 +177,21 @@
   }
   .stat-label{font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:2px;}
 
-  /* hero plate visual */
-  .hero-estimator{
-    background:var(--navy-royal);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:28px;
+  /* hero featured logo */
+  .hero-logo-card{
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
   }
-  .hero-estimator > h3{
-    color:var(--paper);
-    font-size:1.05rem;
-    margin-bottom:6px;
+  .hero-logo-img{
+    width:100%;
+    max-width:460px;
+    height:auto;
   }
-  .hero-estimator-sub{
-    color:rgba(255,255,255,0.68);
-    font-size:0.85rem;
-    margin:0 0 18px;
+  @media (max-width:860px){
+    .hero-logo-card{padding:0; margin-top:8px;}
+    .hero-logo-img{max-width:320px; margin:0 auto;}
   }
-  .hero-estimator .estimator-form label{
-    color:var(--gold-light);
-  }
-  .hero-estimator .estimator-form .hint{
-    color:rgba(255,255,255,0.55);
-  }
-  .hero-estimator .estimator-result{
-    margin-top:22px;
-  }
+
 
   /* ---------- SECTION HEADERS ---------- */
   .section-head{max-width:640px;margin-bottom:48px;}
@@ -264,6 +263,16 @@
   .step p{color:rgba(255,255,255,0.7);margin-top:10px;font-size:0.94rem;}
 
   /* ---------- ESTIMATOR ---------- */
+  .estimator-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:36px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+  }
+  @media (max-width:820px){ .estimator-card{grid-template-columns:1fr;padding:26px;} }
   .estimator-form label{
     display:block;font-size:0.85rem;font-weight:600;
     color:var(--navy-deep);margin-bottom:6px;margin-top:16px;
@@ -422,7 +431,7 @@
 
 <header>
   <div class="navwrap">
-    <a href="#top" class="logo"><img src="renewgp-logo.png" alt="RenewGP — We queue. You cruise." class="logo-img"></a>
+    <a href="#top" class="logo logo-text">Renew<span class="logo-gp">GP</span></a>
     <div class="navlinks-row" id="navlinks">
       <nav>
         <ul>
@@ -441,12 +450,11 @@
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <img src="renewgp-logo.png" alt="RenewGP" class="hero-logo">
       <div class="eyebrow-line"><span class="rule"></span> Licensing services · Johannesburg</div>
       <h1 class="hero-h">We queue. You cruise.</h1>
       <p class="lede">RenewGP handles the paperwork behind your vehicle — license disc renewals, registrations, traffic fines, number plates and more. Drop off your documents, we do the running around.</p>
       <div class="hero-actions">
-        <a href="#services" class="btn btn-primary">See all services</a>
+        <a href="#estimate" class="btn btn-primary">Estimate my renewal cost</a>
         <a href="#contact" class="btn btn-outline">Contact us</a>
       </div>
       <div class="stat-strip">
@@ -465,85 +473,8 @@
       </div>
     </div>
 
-    <div class="hero-estimator" id="estimate">
-      <h3>Estimate your renewal cost</h3>
-      <p class="hero-estimator-sub">A quick Gauteng government-fee estimate — not an official quote.</p>
-      <div class="estimator-form">
-        <label for="est-type">Vehicle type</label>
-        <select id="est-type">
-          <option value="light">Car / bakkie / SUV (by tare weight)</option>
-          <option value="motorcycle">Motorcycle (flat fee)</option>
-          <option value="caravan">Caravan (flat fee)</option>
-        </select>
-
-        <div id="tare-field">
-          <label for="est-tare">Tare / empty mass weight bracket</label>
-          <select id="est-tare">
-            <option value="252">Up to 250 kg</option>
-            <option value="396">251 – 500 kg</option>
-            <option value="432">501 – 750 kg</option>
-            <option value="456">751 – 1,000 kg</option>
-            <option value="528" selected>1,001 – 1,250 kg</option>
-            <option value="732">1,251 – 1,500 kg</option>
-            <option value="852">1,501 – 1,750 kg</option>
-            <option value="1104">1,751 – 2,000 kg</option>
-            <option value="1284">2,001 – 2,250 kg</option>
-            <option value="1536">2,251 – 2,500 kg</option>
-            <option value="1728">2,501 – 2,750 kg</option>
-            <option value="1956">2,751 – 3,000 kg</option>
-            <option value="2112">3,001 – 3,250 kg</option>
-            <option value="2484">3,251 – 3,500 kg</option>
-            <option value="2880">3,501 – 3,750 kg</option>
-            <option value="3216">3,751 – 4,000 kg</option>
-            <option value="3480">4,001 – 4,250 kg</option>
-            <option value="3780">4,251 – 4,500 kg</option>
-            <option value="4116">4,501 – 4,750 kg</option>
-            <option value="4416">4,751 – 5,000 kg</option>
-            <option value="6684">5,001 – 5,250 kg</option>
-            <option value="7392">5,251 – 5,500 kg</option>
-            <option value="8076">5,501 – 5,750 kg</option>
-            <option value="8928">5,751 – 6,000 kg</option>
-            <option value="9600">6,001 – 6,250 kg</option>
-            <option value="10272">6,251 – 6,500 kg</option>
-            <option value="11364">6,501 – 6,750 kg</option>
-            <option value="12060">6,751 – 7,000 kg</option>
-            <option value="12720">7,001 – 7,250 kg</option>
-            <option value="13416">7,251 – 7,500 kg</option>
-            <option value="14796">7,501 – 8,000 kg</option>
-            <option value="16944">8,001 – 8,500 kg</option>
-            <option value="18420">8,501 – 9,000 kg</option>
-            <option value="20472">9,001 – 9,500 kg</option>
-            <option value="22236">9,501 – 10,000 kg</option>
-            <option value="24828">10,001 – 10,500 kg</option>
-            <option value="26976">10,501 – 11,000 kg</option>
-            <option value="29472">11,001 – 11,500 kg</option>
-            <option value="32112">11,501 – 12,000 kg</option>
-          </select>
-          <div class="hint">Match this to the tare weight on your registration certificate (RC1) or eNaTIS printout.</div>
-        </div>
-
-        <label for="est-expiry">Licence expiry date</label>
-        <input id="est-expiry" type="date">
-        <div class="hint">If it hasn't expired yet, pick the upcoming expiry date.</div>
-
-        <button class="btn btn-primary" id="est-calc-btn" type="button">Calculate my estimate</button>
-      </div>
-
-      <div class="estimator-result" id="est-result">
-        <h3>Your estimated renewal cost</h3>
-        <p class="placeholder" id="est-placeholder">Fill in your vehicle details to see a breakdown here.</p>
-        <div id="est-breakdown" style="display:none;">
-          <div class="breakdown-row"><span>Annual licence fee</span><span id="est-fee">R0</span></div>
-          <div class="breakdown-row"><span>Arrears</span><span id="est-arrears">R0</span></div>
-          <div class="breakdown-row"><span>Late penalty</span><span id="est-penalty">R0</span></div>
-          <div class="breakdown-row"><span>RTMC transaction fee</span><span id="est-rtmc">R72</span></div>
-          <div class="breakdown-row total"><span>Estimated government total</span><span id="est-total">R0</span></div>
-          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
-          <div class="estimator-cta">
-            <a href="#contact" class="btn btn-outline" style="width:100%;">Let RenewGP handle it →</a>
-          </div>
-        </div>
-      </div>
+    <div class="hero-logo-card">
+      <img src="renewgp-logo.png" alt="RenewGP — We queue. You cruise." class="hero-logo-img">
     </div>
   </div>
 </section>
@@ -654,6 +585,94 @@
   </div>
 </section>
 
+<section id="estimate">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker"><span class="rule"></span> Gauteng estimate tool</div>
+      <h2>Estimate your license disc renewal cost</h2>
+      <p>Pick your vehicle's weight bracket and licence expiry date for an estimate of the government fees, based on the current Gauteng tariff schedule. This is a guide, not an official quote.</p>
+    </div>
+    <div class="estimator-card">
+      <div class="estimator-form">
+        <label for="est-type">Vehicle type</label>
+        <select id="est-type">
+          <option value="light">Car / bakkie / SUV (by tare weight)</option>
+          <option value="motorcycle">Motorcycle (flat fee)</option>
+          <option value="caravan">Caravan (flat fee)</option>
+        </select>
+
+        <div id="tare-field">
+          <label for="est-tare">Tare / empty mass weight bracket</label>
+          <select id="est-tare">
+            <option value="252">Up to 250 kg</option>
+            <option value="396">251 – 500 kg</option>
+            <option value="432">501 – 750 kg</option>
+            <option value="456">751 – 1,000 kg</option>
+            <option value="528" selected>1,001 – 1,250 kg</option>
+            <option value="732">1,251 – 1,500 kg</option>
+            <option value="852">1,501 – 1,750 kg</option>
+            <option value="1104">1,751 – 2,000 kg</option>
+            <option value="1284">2,001 – 2,250 kg</option>
+            <option value="1536">2,251 – 2,500 kg</option>
+            <option value="1728">2,501 – 2,750 kg</option>
+            <option value="1956">2,751 – 3,000 kg</option>
+            <option value="2112">3,001 – 3,250 kg</option>
+            <option value="2484">3,251 – 3,500 kg</option>
+            <option value="2880">3,501 – 3,750 kg</option>
+            <option value="3216">3,751 – 4,000 kg</option>
+            <option value="3480">4,001 – 4,250 kg</option>
+            <option value="3780">4,251 – 4,500 kg</option>
+            <option value="4116">4,501 – 4,750 kg</option>
+            <option value="4416">4,751 – 5,000 kg</option>
+            <option value="6684">5,001 – 5,250 kg</option>
+            <option value="7392">5,251 – 5,500 kg</option>
+            <option value="8076">5,501 – 5,750 kg</option>
+            <option value="8928">5,751 – 6,000 kg</option>
+            <option value="9600">6,001 – 6,250 kg</option>
+            <option value="10272">6,251 – 6,500 kg</option>
+            <option value="11364">6,501 – 6,750 kg</option>
+            <option value="12060">6,751 – 7,000 kg</option>
+            <option value="12720">7,001 – 7,250 kg</option>
+            <option value="13416">7,251 – 7,500 kg</option>
+            <option value="14796">7,501 – 8,000 kg</option>
+            <option value="16944">8,001 – 8,500 kg</option>
+            <option value="18420">8,501 – 9,000 kg</option>
+            <option value="20472">9,001 – 9,500 kg</option>
+            <option value="22236">9,501 – 10,000 kg</option>
+            <option value="24828">10,001 – 10,500 kg</option>
+            <option value="26976">10,501 – 11,000 kg</option>
+            <option value="29472">11,001 – 11,500 kg</option>
+            <option value="32112">11,501 – 12,000 kg</option>
+          </select>
+          <div class="hint">Match this to the tare weight on your registration certificate (RC1) or eNaTIS printout.</div>
+        </div>
+
+        <label for="est-expiry">Licence expiry date</label>
+        <input id="est-expiry" type="date">
+        <div class="hint">If it hasn't expired yet, pick the upcoming expiry date.</div>
+
+        <button class="btn btn-primary" id="est-calc-btn" type="button">Calculate my estimate</button>
+      </div>
+
+      <div class="estimator-result" id="est-result">
+        <h3>Your estimated renewal cost</h3>
+        <p class="placeholder" id="est-placeholder">Fill in your vehicle details to see a breakdown here.</p>
+        <div id="est-breakdown" style="display:none;">
+          <div class="breakdown-row"><span>Annual licence fee</span><span id="est-fee">R0</span></div>
+          <div class="breakdown-row"><span>Arrears</span><span id="est-arrears">R0</span></div>
+          <div class="breakdown-row"><span>Late penalty</span><span id="est-penalty">R0</span></div>
+          <div class="breakdown-row"><span>RTMC transaction fee</span><span id="est-rtmc">R72</span></div>
+          <div class="breakdown-row total"><span>Estimated government total</span><span id="est-total">R0</span></div>
+          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
+          <div class="estimator-cta">
+            <a href="#contact" class="btn btn-outline" style="width:100%;">Let RenewGP handle it →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="section-head">
@@ -665,7 +684,7 @@
       <div class="contact-card">
         <h3>RenewGP — Johannesburg</h3>
         <div class="contact-line"><span class="lbl">Address</span> <span>Shop 4, 11 Finch St, Atlasville, Boksburg, 1459</span></div>
-        <div class="contact-line"><span class="lbl">Phone</span> <span>+27 64 034 8539</span></div>
+        <div class="contact-line"><span class="lbl">Phone</span> <span>+27 64 034 8539 · +27 74 297 2420</span></div>
         <div class="contact-line"><span class="lbl">WhatsApp</span> <span><a href="https://wa.me/message/I673V63EUONFB1" target="_blank" rel="noopener" style="color:var(--gold-light);">Chat with us on WhatsApp</a></span></div>
         <div class="contact-line"><span class="lbl">Email</span> <span><a href="mailto:renewgp.info@gmail.com" style="color:rgba(255,255,255,0.85);">renewgp.info@gmail.com</a></span></div>
         <div class="contact-line"><span class="lbl">Hours</span> <span>Mon – Fri: 09H00 – 17H30 · Sat – Sun: 08H00 – 13H00</span></div>
