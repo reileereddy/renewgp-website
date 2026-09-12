@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Forms — RenewGP</title>
+<meta name="description" content="Download the vehicle licensing and registration forms you need, handled by RenewGP in Johannesburg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#052A63;
+    --navy-royal:#073B8C;
+    --navy-mid:#0F52B5;
+    --gold:#F5C542;
+    --gold-light:#F8D877;
+    --cream:#F6F3EA;
+    --ink:#12131A;
+    --paper:#FFFFFF;
+    --line: rgba(245,197,66,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+    color:var(--navy-deep);
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:720px){
+    section{padding:56px 0;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--navy-deep);
+    border-bottom:1px solid rgba(198,162,51,0.25);
+  }
+  .navwrap{
+    max-width:1120px;margin:0 auto;padding:0 28px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;
+  }
+  .logo-img{
+    height:42px;
+    width:auto;
+    display:block;
+  }
+  nav ul{
+    list-style:none;display:flex;gap:32px;margin:0;padding:0;
+  }
+  nav a{
+    color:rgba(255,255,255,0.82);
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    transition:color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--gold-light);}
+  .navlinks-row{display:flex;align-items:center;gap:32px;}
+  .menu-btn{
+    display:none;
+    background:none;border:none;
+    color:var(--paper);
+    font-size:1.6rem;
+    cursor:pointer;
+    line-height:1;
+  }
+  @media (max-width:820px){
+    .navlinks-row{
+      position:absolute;top:76px;left:0;right:0;
+      background:var(--navy-deep);
+      flex-direction:column;align-items:flex-start;
+      padding:20px 28px 28px;gap:18px;
+      border-bottom:1px solid rgba(198,162,51,0.25);
+      display:none;
+    }
+    .navlinks-row.open{display:flex;}
+    nav ul{flex-direction:column;gap:16px;width:100%;}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1100px 480px at 82% -10%, rgba(198,162,51,0.16), transparent 60%),
+      var(--navy-deep);
+    color:var(--paper);
+    padding:96px 0 80px;
+    border-bottom:1px solid rgba(198,162,51,0.25);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-logo{
+    height:56px;
+    width:auto;
+    margin-bottom:26px;
+  }
+  .eyebrow-line{
+    display:flex;align-items:center;gap:10px;
+    color:var(--gold-light);
+    font-size:0.92rem;font-weight:600;
+    margin-bottom:22px;
+  }
+  .eyebrow-line span.rule{width:28px;height:1px;background:var(--gold);display:inline-block;}
+  h1.hero-h{
+    font-size:clamp(2.1rem, 4vw, 3.15rem);
+    color:var(--paper);
+    max-width:16ch;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:46ch;
+    color:rgba(255,255,255,0.78);
+    font-size:1.08rem;
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;
+    border-radius:3px;
+    font-weight:600;
+    text-decoration:none;
+    font-size:0.98rem;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy-deep);}
+  .btn-primary:hover{background:var(--gold-light);}
+  .btn-outline{border-color:rgba(255,255,255,0.4);color:var(--paper);background:transparent;}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold-light);}
+
+  .stat-strip{
+    display:flex;gap:34px;margin-top:48px;flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,0.14);
+    padding-top:28px;
+  }
+  .stat-strip div{min-width:120px;}
+  .stat-num{
+    font-family:'Fraunces', serif;font-size:1.6rem;color:var(--gold-light);font-weight:600;
+  }
+  .stat-label{font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:2px;}
+
+  /* hero plate visual */
+  .hero-estimator{
+    background:var(--navy-royal);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:28px;
+  }
+  .hero-estimator > h3{
+    color:var(--paper);
+    font-size:1.05rem;
+    margin-bottom:6px;
+  }
+  .hero-estimator-sub{
+    color:rgba(255,255,255,0.68);
+    font-size:0.85rem;
+    margin:0 0 18px;
+  }
+  .hero-estimator .estimator-form label{
+    color:var(--gold-light);
+  }
+  .hero-estimator .estimator-form .hint{
+    color:rgba(255,255,255,0.55);
+  }
+  .hero-estimator .estimator-result{
+    margin-top:22px;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head .kicker{
+    color:var(--navy-mid);
+    font-weight:600;font-size:0.88rem;
+    margin-bottom:12px;
+    display:flex;align-items:center;gap:9px;
+  }
+  .section-head .kicker span.rule{width:24px;height:1px;background:var(--gold);display:inline-block;}
+  .section-head h2{font-size:clamp(1.6rem,2.6vw,2.2rem);}
+  .section-head p{margin-top:14px;color:#3c3f4a;max-width:56ch;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:860px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--paper);
+    padding:32px 28px;
+    min-height:210px;
+    display:flex;flex-direction:column;
+  }
+  .service-card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+  }
+  .service-card p{
+    color:#4a4d58;
+    font-size:0.94rem;
+    flex-grow:1;
+  }
+  .service-card .tag{
+    margin-top:16px;
+    font-size:0.78rem;
+    color:var(--navy-mid);
+    font-weight:600;
+  }
+  .service-card.more{
+    background:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+  }
+  .service-card.more p{color:#5a5d68;font-size:0.92rem;flex-grow:0;}
+
+  /* ---------- PROCESS ---------- */
+  .process{
+    background:var(--navy-deep);
+    color:var(--paper);
+  }
+  .process .section-head h2, .process .section-head p{color:var(--paper);}
+  .process .section-head p{color:rgba(255,255,255,0.72);}
+  .process .section-head .kicker{color:var(--gold-light);}
+  .steps{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
+  }
+  @media (max-width:780px){ .steps{grid-template-columns:1fr;} }
+  .step .num{
+    font-family:'Fraunces', serif;
+    font-size:2.1rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .step h3{color:var(--paper);margin-top:10px;font-size:1.1rem;}
+  .step p{color:rgba(255,255,255,0.7);margin-top:10px;font-size:0.94rem;}
+
+  /* ---------- ESTIMATOR ---------- */
+  .estimator-form label{
+    display:block;font-size:0.85rem;font-weight:600;
+    color:var(--navy-deep);margin-bottom:6px;margin-top:16px;
+  }
+  .estimator-form label:first-child{margin-top:0;}
+  .estimator-form select, .estimator-form input{
+    width:100%;
+    padding:11px 13px;
+    border:1px solid #cfd2da;
+    border-radius:3px;
+    font-family:'Public Sans', sans-serif;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .estimator-form .hint{font-size:0.78rem;color:#6b6e78;margin-top:5px;}
+  .estimator-form button{margin-top:22px;width:100%;justify-content:center;}
+  .estimator-result{
+    background:var(--navy-deep);
+    border-radius:4px;
+    padding:26px 28px;
+    color:var(--paper);
+    display:flex;flex-direction:column;
+  }
+  .estimator-result h3{color:var(--paper);font-size:1.05rem;margin-bottom:16px;}
+  .estimator-result .placeholder{
+    color:rgba(255,255,255,0.55);
+    font-size:0.9rem;
+    margin:auto 0;
+  }
+  .breakdown-row{
+    display:flex;justify-content:space-between;
+    padding:10px 0;
+    border-top:1px solid rgba(255,255,255,0.14);
+    font-size:0.92rem;
+  }
+  .breakdown-row:first-of-type{border-top:none;}
+  .breakdown-row.total{
+    border-top:1px solid var(--gold);
+    margin-top:6px;padding-top:14px;
+    font-weight:700;font-size:1.05rem;
+    color:var(--gold-light);
+  }
+  .estimator-note{
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.6);
+    margin-top:18px;
+    border-left:2px solid var(--gold);
+    padding-left:12px;
+  }
+  .estimator-cta{
+    margin-top:18px;
+    text-align:center;
+  }
+
+  /* ---------- FORMS ---------- */
+  .forms-list{
+    border-top:1px solid var(--line);
+  }
+  .form-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .form-row .fname{font-weight:600;color:var(--navy-deep); display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .form-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    color:var(--paper);
+    font-family:'Public Sans', sans-serif;
+    font-size:0.68rem; font-weight:700; letter-spacing:0.03em;
+    padding:3px 7px; border-radius:3px;
+    line-height:1.4;
+  }
+  .form-row .fmeta{font-size:0.85rem;color:#6b6e78;margin-top:4px;}
+  .form-download{
+    font-size:0.85rem;font-weight:600;
+    color:var(--navy-mid);
+    border:1px solid var(--navy-mid);
+    padding:8px 16px;border-radius:3px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .form-download:hover{background:var(--navy-mid); color:var(--paper);}
+  .form-download.disabled{
+    color:#9a9da6;border-color:#c9cbd1;cursor:not-allowed;
+  }
+  .form-download.disabled:hover{background:none; color:#9a9da6;}
+  .forms-note{
+    margin-top:26px;
+    font-size:0.9rem;
+    color:#5a5d68;
+    border-left:2px solid var(--gold);
+    padding-left:14px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+  }
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;gap:36px;} }
+  .about-grid h2{font-size:clamp(1.6rem,2.6vw,2.1rem);max-width:14ch;}
+  .about-grid .lede{margin-top:18px;color:#3c3f4a;}
+  .trust-points{list-style:none;margin:0;padding:0;}
+  .trust-points li{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    display:flex;gap:14px;
+  }
+  .trust-points li:first-child{border-top:none;}
+  .trust-points .mark{
+    color:var(--gold);
+    font-family:'Fraunces', serif;font-weight:700;
+  }
+  .trust-points strong{display:block;color:var(--navy-deep);margin-bottom:3px;}
+  .trust-points span.desc{color:#4a4d58;font-size:0.92rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--navy-royal);color:var(--paper);}
+  .contact .section-head h2, .contact .section-head p{color:var(--paper);}
+  .contact .section-head p{color:rgba(255,255,255,0.75);}
+  .contact .section-head .kicker{color:var(--gold-light);}
+  .contact-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+  }
+  @media (max-width:820px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(198,162,51,0.3);
+    border-radius:4px;
+    padding:28px;
+  }
+  .contact-card h3{color:var(--paper);font-size:1.1rem;margin-bottom:16px;}
+  .contact-line{
+    display:flex;gap:12px;padding:10px 0;
+    border-top:1px solid rgba(255,255,255,0.1);
+    font-size:0.94rem;color:rgba(255,255,255,0.85);
+  }
+  .contact-line:first-of-type{border-top:none;}
+  .contact-line .lbl{color:var(--gold-light);min-width:88px;font-weight:600;font-size:0.85rem;}
+
+  form.quote-form{display:flex;flex-direction:column;gap:14px;}
+  form.quote-form input, form.quote-form select, form.quote-form textarea{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.25);
+    color:var(--paper);
+    padding:12px 14px;
+    border-radius:3px;
+    font-family:'Public Sans', sans-serif;
+    font-size:0.94rem;
+  }
+  form.quote-form input::placeholder, form.quote-form textarea::placeholder{color:rgba(255,255,255,0.45);}
+  form.quote-form label{font-size:0.82rem;color:rgba(255,255,255,0.7);margin-bottom:-8px;}
+  form.quote-form button{
+    margin-top:6px;
+    align-self:flex-start;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:rgba(255,255,255,0.6);
+    padding:36px 0;
+    font-size:0.86rem;
+  }
+  .footer-row{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  }
+  .footer-row a{color:rgba(255,255,255,0.6);text-decoration:none;}
+  .footer-row a:hover{color:var(--gold-light);}
+  .footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navwrap">
+    <a href="index.html" class="logo"><img src="renewgp-logo.png" alt="RenewGP — We queue. You cruise." class="logo-img"></a>
+    <div class="navlinks-row" id="navlinks">
+      <nav>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#process">How it works</a></li>
+          <li><a href="index.html#estimate">Estimate cost</a></li>
+          <li><a href="renewgp-forms.html">Forms</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<section style="background:var(--navy-deep); padding:56px 0 44px; border-bottom:1px solid rgba(245,197,66,0.25);">
+  <div class="wrap">
+    <div class="eyebrow-line"><span class="rule"></span> Paperwork</div>
+    <h1 style="color:var(--paper); font-size:clamp(1.8rem,3.5vw,2.6rem); max-width:20ch;">Download forms</h1>
+    <p style="color:rgba(255,255,255,0.78); max-width:52ch; margin-top:16px;">Save time by filling in the relevant form before you visit us or send it through. This list is growing as we add more services.</p>
+  </div>
+</section>
+
+<section id="forms" style="padding-top:64px;">
+  <div class="wrap">
+    <div class="forms-list">
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#3B6FD1;">RLV</span> Application for Registration &amp; Licensing of Motor Vehicle</div>
+          <div class="fmeta">Registering a vehicle (and licensing it) for the first time, e.g. when it's new or imported</div>
+        </div>
+        <a href="forms/RLV-Application-for-Registration-Licensing-of-Motor-Vehicle.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#4CAF50;">ALV</span> Application for Licensing of Motor Vehicle</div>
+          <div class="fmeta">Annual licence disc renewal, including renewals made after expiry</div>
+        </div>
+        <a href="forms/ALV-Application-for-Licensing-of-motor-Vehicle-or-renewal.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#E8C542; color:#12131A;">NCO</span> Notification of Change of Ownership / Sale</div>
+          <div class="fmeta">Completed by both buyer and seller when a vehicle changes hands</div>
+        </div>
+        <a href="forms/NCO-Notification-of-Change-of-Ownership-notification-of-sale.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#E05252;">NCP</span> Notification of Change of Address or Particulars</div>
+          <div class="fmeta">Updates your address or personal details with the licensing department</div>
+        </div>
+        <a href="forms/NCP-Notification-of-Change-of-Address-or-particulars-of-person-or-organisation.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#F4B183; color:#12131A;">DRC</span> Application for Duplicate Registration / Deregistration Certificate</div>
+          <div class="fmeta">Replaces a lost, stolen or destroyed registration or deregistration certificate — not for licence discs</div>
+        </div>
+        <a href="forms/DRC-Application-for-Duplicate-Registration-or-Derigistration-Certificate.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#E58AC0; color:#12131A;">ADV</span> Application for Deregistration of Vehicle</div>
+          <div class="fmeta">For scrapping, permanently written-off, stolen or exempted vehicles</div>
+        </div>
+        <a href="forms/ADV-Application-of-Deregistration-of-Vehicle.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#8B5E3C;">ANR</span> Application &amp; Notice — Traffic Register Number</div>
+          <div class="fmeta">For individuals or entities who need a Traffic Register Number instead of an ID or company registration number</div>
+        </div>
+        <a href="forms/ANR-Application-and-Notice-of-Traffic-Register-number.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#8B5E3C;">ABR</span> Application &amp; Notice — Business Register Number</div>
+          <div class="fmeta">Registers a business register number for an organisation, or updates one already issued</div>
+        </div>
+        <a href="forms/ABR-Application-and-Notice-of-Business-Register-Number.pdf" class="form-download" download>Download PDF</a>
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="fname"><span class="form-badge" style="background:#E6E6E6; color:#12131A; border:1px solid #c9cbd1;">MTN1</span> Application &amp; Notice — Motor Trade Number</div>
+          <div class="fmeta">For dealers and traders applying for trade plates, dealer stocking, or blank temporary permits</div>
+        </div>
+        <a href="forms/MTN1-Application-IRO-Motor-Trade-Number.pdf" class="form-download" download>Download PDF</a>
+      </div>
+    </div>
+    <p class="forms-note">These are the official RTMC/NaTIS forms (National Road Traffic Act, 1996). Not sure which one applies to you, or need help completing one? Get in touch and we'll take care of it with you.</p>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap footer-row">
+    <div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="renewgp-forms.html">Forms</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const menuBtn = document.getElementById('menuBtn');
+  const navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  navlinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navlinks.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
