@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — RenewGP</title>
+<meta name="description" content="How RenewGP collects, uses, and protects your personal information in line with South Africa's POPIA.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#052A63;
+    --navy-royal:#073B8C;
+    --navy-mid:#0F52B5;
+    --gold:#F5C542;
+    --gold-light:#F8D877;
+    --cream:#F6F3EA;
+    --ink:#12131A;
+    --paper:#FFFFFF;
+    --line: rgba(245,197,66,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+    color:var(--navy-deep);
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:720px){
+    section{padding:56px 0;}
+  }
+
+  /* ---------- ANNOUNCEMENT BAR ---------- */
+  .announce-bar{
+    background:var(--gold);
+    color:var(--navy-deep);
+    text-align:center;
+    padding:11px 20px;
+  }
+  .announce-inner{
+    max-width:1120px; margin:0 auto; padding:0 40px;
+    position:relative;
+    font-size:0.88rem; font-weight:600;
+  }
+  .announce-inner strong{ font-weight:800; }
+  .announce-close{
+    position:absolute; right:0; top:50%;
+    transform:translateY(-50%);
+    background:none; border:none;
+    font-size:1.25rem; line-height:1;
+    color:var(--navy-deep);
+    cursor:pointer;
+    padding:2px 6px;
+    opacity:0.7;
+  }
+  .announce-close:hover{ opacity:1; }
+  @media (max-width:600px){
+    .announce-inner{ font-size:0.78rem; padding:0 32px; }
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--navy-deep);
+    border-bottom:1px solid rgba(198,162,51,0.25);
+  }
+  .navwrap{
+    max-width:1120px;margin:0 auto;padding:0 28px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;
+  }
+  .logo-img{
+    height:42px;
+    width:auto;
+    display:block;
+  }
+  .logo-text{
+    font-family:'Poppins', sans-serif;
+    font-weight:800;
+    font-size:1.4rem;
+    color:var(--paper);
+    letter-spacing:0.005em;
+    gap:0;
+  }
+  .logo-gp{
+    color:var(--gold);
+  }
+  nav ul{
+    list-style:none;display:flex;gap:32px;margin:0;padding:0;
+  }
+  nav a{
+    color:rgba(255,255,255,0.82);
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    transition:color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--gold-light);}
+  .navlinks-row{display:flex;align-items:center;gap:32px;}
+  .menu-btn{
+    display:none;
+    background:none;border:none;
+    color:var(--paper);
+    font-size:1.6rem;
+    cursor:pointer;
+    line-height:1;
+  }
+  @media (max-width:820px){
+    .navlinks-row{
+      position:absolute;top:76px;left:0;right:0;
+      background:var(--navy-deep);
+      flex-direction:column;align-items:flex-start;
+      padding:20px 28px 28px;gap:18px;
+      border-bottom:1px solid rgba(198,162,51,0.25);
+      display:none;
+    }
+    .navlinks-row.open{display:flex;}
+    nav ul{flex-direction:column;gap:16px;width:100%;}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1100px 480px at 82% -10%, rgba(198,162,51,0.16), transparent 60%),
+      var(--navy-deep);
+    color:var(--paper);
+    padding:96px 0 80px;
+    border-bottom:1px solid rgba(198,162,51,0.25);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow-line{
+    display:flex;align-items:center;gap:10px;
+    color:var(--gold-light);
+    font-size:0.92rem;font-weight:600;
+    margin-bottom:22px;
+  }
+  .eyebrow-line span.rule{width:28px;height:1px;background:var(--gold);display:inline-block;}
+  h1.hero-h{
+    font-size:clamp(2.1rem, 4vw, 3.15rem);
+    color:var(--paper);
+    max-width:16ch;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:46ch;
+    color:rgba(255,255,255,0.78);
+    font-size:1.08rem;
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;
+    border-radius:3px;
+    font-weight:600;
+    text-decoration:none;
+    font-size:0.98rem;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy-deep);}
+  .btn-primary:hover{background:var(--gold-light);}
+  .btn-outline{border-color:rgba(255,255,255,0.4);color:var(--paper);background:transparent;}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold-light);}
+
+  .stat-strip{
+    display:flex;gap:34px;margin-top:48px;flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,0.14);
+    padding-top:28px;
+  }
+  .stat-strip div{min-width:120px;}
+  .stat-num{
+    font-family:'Fraunces', serif;font-size:1.6rem;color:var(--gold-light);font-weight:600;
+  }
+  .stat-label{font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:2px;}
+
+  /* hero featured logo */
+  .hero-logo-card{
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .hero-logo-img{
+    width:100%;
+    max-width:460px;
+    height:auto;
+  }
+  @media (max-width:860px){
+    .hero-logo-card{padding:0; margin-top:8px;}
+    .hero-logo-img{max-width:320px; margin:0 auto;}
+  }
+
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head .kicker{
+    color:var(--navy-mid);
+    font-weight:600;font-size:0.88rem;
+    margin-bottom:12px;
+    display:flex;align-items:center;gap:9px;
+  }
+  .section-head .kicker span.rule{width:24px;height:1px;background:var(--gold);display:inline-block;}
+  .section-head h2{font-size:clamp(1.6rem,2.6vw,2.2rem);}
+  .section-head p{margin-top:14px;color:#3c3f4a;max-width:56ch;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:860px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .services-grid{grid-template-columns:1fr;} }
+  .service-btn{
+    background:var(--paper);
+    border:none;
+    padding:26px 24px;
+    min-height:88px;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    text-align:left;
+    cursor:pointer;
+    font-family:'Public Sans', sans-serif;
+  }
+  .service-btn:hover, .service-btn:focus-visible{
+    background:var(--cream);
+  }
+  .service-btn h3{
+    font-size:1.05rem;
+    color:var(--navy-deep);
+    font-weight:600;
+    font-family:'Fraunces', serif;
+  }
+  .service-btn .arrow{
+    flex-shrink:0;
+    color:var(--gold);
+    font-size:1.3rem;
+    line-height:1;
+    transition:transform .15s ease;
+  }
+  .service-btn:hover .arrow{ transform:translateX(3px); }
+
+  /* Service detail modal */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(5,17,45,0.6);
+    display:none;
+    align-items:center; justify-content:center;
+    padding:20px;
+    z-index:1000;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background:var(--paper);
+    max-width:540px; width:100%;
+    max-height:85vh; overflow-y:auto;
+    border-radius:5px;
+    padding:34px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px;
+    background:none; border:none;
+    font-size:1.6rem; line-height:1;
+    color:#8a8d97; cursor:pointer;
+    padding:4px;
+  }
+  .modal-close:hover{ color:var(--navy-deep); }
+  .modal-box h3{
+    font-family:'Fraunces', serif;
+    font-size:1.4rem;
+    color:var(--navy-deep);
+    max-width:22ch;
+  }
+  .modal-section{ margin-top:22px; }
+  .modal-label{
+    font-size:0.75rem; font-weight:700;
+    letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--navy-mid);
+    margin-bottom:6px;
+  }
+  .modal-section p{
+    color:#4a4d58; font-size:0.94rem; margin:0;
+  }
+  .modal-cta{ margin-top:28px; }
+
+  /* ---------- PROCESS ---------- */
+  .process{
+    background:var(--navy-deep);
+    color:var(--paper);
+  }
+  .process .section-head h2, .process .section-head p{color:var(--paper);}
+  .process .section-head p{color:rgba(255,255,255,0.72);}
+  .process .section-head .kicker{color:var(--gold-light);}
+  .steps{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
+  }
+  @media (max-width:780px){ .steps{grid-template-columns:1fr;} }
+  .step .num{
+    font-family:'Fraunces', serif;
+    font-size:2.1rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .step h3{color:var(--paper);margin-top:10px;font-size:1.1rem;}
+  .step p{color:rgba(255,255,255,0.7);margin-top:10px;font-size:0.94rem;}
+
+  /* ---------- ESTIMATOR ---------- */
+  .estimator-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:36px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+  }
+  @media (max-width:820px){ .estimator-card{grid-template-columns:1fr;padding:26px;} }
+  .estimator-form label{
+    display:block;font-size:0.85rem;font-weight:600;
+    color:var(--navy-deep);margin-bottom:6px;margin-top:16px;
+  }
+  .estimator-form label:first-child{margin-top:0;}
+  .estimator-form select, .estimator-form input{
+    width:100%;
+    padding:11px 13px;
+    border:1px solid #cfd2da;
+    border-radius:3px;
+    font-family:'Public Sans', sans-serif;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .estimator-form .hint{font-size:0.78rem;color:#6b6e78;margin-top:5px;}
+  .estimator-form button{margin-top:22px;width:100%;justify-content:center;}
+  .estimator-result{
+    background:var(--navy-deep);
+    border-radius:4px;
+    padding:26px 28px;
+    color:var(--paper);
+    display:flex;flex-direction:column;
+  }
+  .estimator-result h3{color:var(--paper);font-size:1.05rem;margin-bottom:16px;}
+  .estimator-result .placeholder{
+    color:rgba(255,255,255,0.55);
+    font-size:0.9rem;
+    margin:auto 0;
+  }
+  .breakdown-row{
+    display:flex;justify-content:space-between;
+    padding:10px 0;
+    border-top:1px solid rgba(255,255,255,0.14);
+    font-size:0.92rem;
+  }
+  .breakdown-row:first-of-type{border-top:none;}
+  .breakdown-row.total{
+    border-top:1px solid var(--gold);
+    margin-top:6px;padding-top:14px;
+    font-weight:700;font-size:1.05rem;
+    color:var(--gold-light);
+  }
+  .estimator-note{
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.6);
+    margin-top:18px;
+    border-left:2px solid var(--gold);
+    padding-left:12px;
+  }
+  .estimator-cta{
+    margin-top:18px;
+    text-align:center;
+  }
+
+  /* ---------- FORMS ---------- */
+  .forms-list{
+    border-top:1px solid var(--line);
+  }
+  .form-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .form-row .fname{font-weight:600;color:var(--navy-deep);}
+  .form-row .fmeta{font-size:0.85rem;color:#6b6e78;margin-top:4px;}
+  .form-download{
+    font-size:0.85rem;font-weight:600;
+    color:var(--navy-mid);
+    border:1px solid var(--navy-mid);
+    padding:8px 16px;border-radius:3px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .form-download.disabled{
+    color:#9a9da6;border-color:#c9cbd1;cursor:not-allowed;
+  }
+  .forms-note{
+    margin-top:26px;
+    font-size:0.9rem;
+    color:#5a5d68;
+    border-left:2px solid var(--gold);
+    padding-left:14px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+  }
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;gap:36px;} }
+  .about-grid h2{font-size:clamp(1.6rem,2.6vw,2.1rem);max-width:14ch;}
+  .about-grid .lede{margin-top:18px;color:#3c3f4a;}
+  .trust-points{list-style:none;margin:0;padding:0;}
+  .trust-points li{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    display:flex;gap:14px;
+  }
+  .trust-points li:first-child{border-top:none;}
+  .trust-points .mark{
+    color:var(--gold);
+    font-family:'Fraunces', serif;font-weight:700;
+  }
+  .trust-points strong{display:block;color:var(--navy-deep);margin-bottom:3px;}
+  .trust-points span.desc{color:#4a4d58;font-size:0.92rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--navy-royal);color:var(--paper);}
+  .contact .section-head h2, .contact .section-head p{color:var(--paper);}
+  .contact .section-head p{color:rgba(255,255,255,0.75);}
+  .contact .section-head .kicker{color:var(--gold-light);}
+  .contact-grid{
+    display:flex;justify-content:center;
+  }
+  .contact-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(198,162,51,0.3);
+    border-radius:4px;
+    padding:32px 36px;
+    max-width:520px;
+    width:100%;
+  }
+  .contact-card h3{color:var(--paper);font-size:1.1rem;margin-bottom:16px;}
+  .contact-line{
+    display:flex;gap:12px;padding:10px 0;
+    border-top:1px solid rgba(255,255,255,0.1);
+    font-size:0.94rem;color:rgba(255,255,255,0.85);
+  }
+  .contact-line:first-of-type{border-top:none;}
+  .contact-line .lbl{color:var(--gold-light);min-width:88px;font-weight:600;font-size:0.85rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:rgba(255,255,255,0.6);
+    padding:36px 0;
+    font-size:0.86rem;
+  }
+  .footer-row{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  }
+  .footer-row a{color:rgba(255,255,255,0.6);text-decoration:none;}
+  .footer-row a:hover{color:var(--gold-light);}
+  .footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<style>
+  .legal-hero{
+    background:var(--navy-deep); padding:56px 0 44px;
+    border-bottom:1px solid rgba(245,197,66,0.25);
+  }
+  .legal-hero h1{
+    color:var(--paper); font-size:clamp(1.8rem,3.5vw,2.4rem); max-width:26ch;
+  }
+  .legal-hero p{ color:rgba(255,255,255,0.75); margin-top:14px; }
+  .legal-body{ max-width:760px; margin:0 auto; padding:56px 28px 80px; }
+  .legal-body h2{
+    font-family:'Fraunces', serif; color:var(--navy-deep);
+    font-size:1.3rem; margin-top:40px; margin-bottom:14px;
+  }
+  .legal-body h2:first-child{ margin-top:0; }
+  .legal-body p{ color:#3c3f4a; margin-bottom:14px; }
+  .legal-body ul{ color:#3c3f4a; margin:0 0 14px; padding-left:22px; }
+  .legal-body li{ margin-bottom:8px; }
+  .legal-note{
+    background:var(--cream); border-left:3px solid var(--gold);
+    padding:16px 20px; font-size:0.9rem; color:#4a4d58; margin-bottom:32px;
+  }
+</style>
+
+<body>
+
+<div class="announce-bar" id="announceBar">
+  <div class="announce-inner">
+    We're opening our doors on <strong>19 October 2026</strong> — <a href="index.html#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
+    <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+
+<header>
+  <div class="navwrap">
+    <a href="index.html" class="logo logo-text">Renew<span class="logo-gp">GP</span></a>
+    <div class="navlinks-row" id="navlinks">
+      <nav>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#process">How it works</a></li>
+          <li><a href="index.html#estimate">Estimate cost</a></li>
+          <li><a href="renewgp-forms.html">Forms</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<section class="legal-hero">
+  <div class="wrap">
+    <div class="eyebrow-line"><span class="rule"></span> Legal</div>
+    <h1>Privacy Policy</h1>
+    <p>How we handle your personal information, in line with South Africa's Protection of Personal Information Act (POPIA).</p>
+  </div>
+</section>
+
+<section>
+  <div class="legal-body">
+
+    <h2>1. Who we are</h2>
+    <p>RenewGP ("we", "us", "our", "the Company") is a vehicle licensing and registration services business based at Shop 4, 11 Finch St, Atlasville, Boksburg, 1459, South Africa. We can be contacted at renewgp.info@gmail.com, +27 64 034 8539, or +27 74 297 2420.</p>
+    <p>This Privacy Policy applies to our website (renewgp.co.za) and to the services we provide to you in person, telephonically, via WhatsApp, or by email. By using our services or this website, you agree to the terms of this Privacy Policy. If you do not agree with any part of it, please do not use our services or continue browsing this website.</p>
+
+    <h2>2. Who this policy applies to</h2>
+    <p>This policy applies to:</p>
+    <ul>
+      <li>anyone who visits our website; and</li>
+      <li>anyone who engages us as a customer to carry out a vehicle licensing, registration, or related service.</li>
+    </ul>
+
+    <h2>3. Definitions</h2>
+    <ul>
+      <li><strong>Personal Information</strong> means information relating to an identifiable, living natural person, or an identifiable existing juristic person (such as a company), as defined in the Protection of Personal Information Act 4 of 2013 (POPIA).</li>
+      <li><strong>Processing</strong> means anything done with personal information — including collecting, recording, storing, using, sharing, or destroying it — as defined in POPIA.</li>
+      <li><strong>You</strong> or <strong>the customer</strong> means any person who uses our services or accesses our website, including someone acting on behalf of another person or an organisation.</li>
+      <li><strong>Service Provider</strong> means any third party we may use to help deliver our services (for example, a courier, or the relevant government licensing authority).</li>
+      <li><strong>Website</strong> means renewgp.co.za.</li>
+    </ul>
+
+    <h2>4. Legal capacity and minors</h2>
+    <p>Our services are intended for use by adults (18 years or older) or by a parent/legal guardian acting on behalf of a minor. Some of our services — such as ID and learner's licence photos — are commonly used by minors applying for a learner's licence. Where a minor's personal information is provided to us, we will treat this as having been provided with the knowledge and consent of that minor's parent or legal guardian, and it is the responsibility of the accompanying adult to ensure they are authorised to provide that consent.</p>
+
+    <h2>5. Your obligations when sharing information with us</h2>
+    <p>You may only give us personal information about yourself, or about another person where you have that person's permission to do so (for example, submitting documents on behalf of a family member or an employer). By providing us with someone else's personal information, you confirm that you are authorised to share it with us for the purpose of the service being requested.</p>
+
+    <h2>6. Information we collect</h2>
+    <p>Depending on the service you request, we may collect:</p>
+    <ul>
+      <li><strong>Identifying information</strong> — your full name, ID number, date of birth, or Traffic Register Number</li>
+      <li><strong>Contact information</strong> — your phone number, email address, or WhatsApp number</li>
+      <li><strong>Address information</strong> — your physical or postal address</li>
+      <li><strong>Vehicle and document information</strong> — vehicle registration numbers, VIN/chassis numbers, NaTIS records, and copies of related certificates or forms</li>
+      <li><strong>Payment reference information</strong> — where fees are paid via EFT or bank transfer, we may see the proof of payment or reference details associated with that transaction. We do not store full banking card details, and we do not process online card payments through this website.</li>
+    </ul>
+    <p>We collect this information directly from you — in person, via WhatsApp, phone, or email — when you request a service from us. We do not currently collect personal information automatically through this website (there is no account registration, contact form, or tracking on this site).</p>
+
+    <h2>7. How we use your information</h2>
+    <p>We use your personal information to:</p>
+    <ul>
+      <li>provide the specific service you've requested, including preparing and submitting applications, renewals, or notifications to the relevant licensing authority (such as the RTMC or Gauteng provincial licensing departments) on your behalf;</li>
+      <li>contact you regarding the progress, completion, or any issue with your request;</li>
+      <li>keep the records necessary to meet our own legal and administrative obligations; and</li>
+      <li>improve how we run our services.</li>
+    </ul>
+    <p>We do not use your personal information for direct marketing, and we do not sell, rent, or trade it to third parties.</p>
+
+    <h2>8. How we process your information</h2>
+    <p>In line with POPIA, we commit to the following when processing your personal information:</p>
+    <ul>
+      <li>We only collect personal information for a purpose connected to the service you've asked us to perform.</li>
+      <li>We only process personal information that is adequate and relevant for that purpose — we don't ask for more than we need.</li>
+      <li>We will not use your personal information for a different, unrelated purpose without your consent, unless required or permitted by law.</li>
+      <li>We keep records of what personal information was collected and why, for as long as reasonably necessary.</li>
+      <li>We securely destroy or delete personal information once it is no longer needed for the purpose it was collected for, or once our legal recordkeeping obligations have been met.</li>
+    </ul>
+
+    <h2>9. Who we share your information with</h2>
+    <p>We only share your personal information in the following situations:</p>
+    <ul>
+      <li><strong>With licensing authorities:</strong> to complete your request, we share the necessary information with the relevant government department or authority, such as the RTMC or Gauteng provincial licensing offices.</li>
+      <li><strong>With service providers:</strong> where we use a third party to help deliver part of a service (for example, a courier), we only share what's necessary for them to carry out that task.</li>
+      <li><strong>For legal reasons:</strong> if required to do so by law, or in response to a valid request from a court, regulator, or government authority.</li>
+      <li><strong>With your consent:</strong> for any other purpose, only with your explicit permission.</li>
+    </ul>
+    <p>We do not share your personal information with third parties for their own marketing purposes.</p>
+
+    <h2>10. How long we keep your information</h2>
+    <p>We retain your personal information only for as long as necessary to complete your request and to meet any legal or recordkeeping obligations that apply to our business, after which it is securely destroyed or deleted.</p>
+
+    <h2>11. Security of your information</h2>
+    <p>We take reasonable technical and organisational precautions to keep your documents and information secure, including limiting who has access to physical and digital copies of your documents, and disposing of documents securely once they are no longer needed. However, no method of storage or transmission (including over the internet, WhatsApp, or email) is 100% secure, and we cannot guarantee absolute security of information sent to us through these channels.</p>
+
+    <h2>12. Cookies and website tracking</h2>
+    <p>This website does not currently use cookies, analytics, or tracking technology of any kind. If this changes in future — for example, if we add website analytics — this policy will be updated and a cookie notice will be displayed on the site to obtain your consent where required.</p>
+
+    <h2>13. Links to other websites</h2>
+    <p>Our website may occasionally link to third-party websites or services. We have no control over, and accept no responsibility for, the privacy practices of any third-party website. We recommend reviewing the privacy policy of any external site you visit.</p>
+
+    <h2>14. Your rights under POPIA</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>ask us what personal information we hold about you;</li>
+      <li>request that we correct inaccurate information;</li>
+      <li>request that we delete your information, subject to any legal retention requirements;</li>
+      <li>object to how your information is being used; and</li>
+      <li>lodge a complaint with the Information Regulator of South Africa if you believe your information has been mishandled.</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at renewgp.info@gmail.com.</p>
+
+    <h2>15. Information Officer</h2>
+    <p>Any queries regarding this policy or your personal information can be directed to our Information Officer via renewgp.info@gmail.com.</p>
+
+    <h2>16. Changes to this policy</h2>
+    <p>We may update this policy from time to time, for example due to legal changes or changes in how we operate. Continuing to use our services or website after a revised policy is posted means you agree to the updated version. The current version was last updated on the date shown below.</p>
+    <p><em>Last updated: September 2026</em></p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="renewgp-forms.html">Forms</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms and Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- ANNOUNCEMENT BAR ----------
+  (function(){
+    const bar = document.getElementById('announceBar');
+    if(!bar) return;
+    const OPENING_DATE = new Date('2026-10-19T00:00:00');
+    const dismissed = localStorage.getItem('renewgp_announce_dismissed');
+    if(new Date() >= OPENING_DATE || dismissed){
+      bar.style.display = 'none';
+      return;
+    }
+    document.getElementById('announceClose').addEventListener('click', () => {
+      bar.style.display = 'none';
+      localStorage.setItem('renewgp_announce_dismissed', '1');
+    });
+  })();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  navlinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navlinks.classList.remove('open'));
+  });
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ead145842f3243ecb1f7e72a20333ebd"}'></script><!-- End Cloudflare Web Analytics -->
+
+</body>
+</html>
