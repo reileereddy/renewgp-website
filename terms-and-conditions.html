@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms and Conditions — RenewGP</title>
 <meta name="description" content="The terms and conditions that apply when you use RenewGP's vehicle licensing and registration services.">
+<link rel="canonical" href="https://renewgp.co.za/terms-and-conditions.html">
+<meta name="robots" content="noindex, follow">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" href="favicon.ico">
@@ -527,22 +529,22 @@
 
 <div class="announce-bar" id="announceBar">
   <div class="announce-inner">
-    We're opening our doors on <strong>19 October 2026</strong> — <a href="index.html#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
+    We're opening our doors on <strong>16 October 2026</strong> — <a href="/#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
     <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
   </div>
 </div>
 
 <header>
   <div class="navwrap">
-    <a href="index.html" class="logo logo-text">Renew<span class="logo-gp">GP</span></a>
+    <a href="/" class="logo logo-text">Renew<span class="logo-gp">GP</span></a>
     <div class="navlinks-row" id="navlinks">
       <nav>
         <ul>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#process">How it works</a></li>
-          <li><a href="index.html#estimate">Estimate cost</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#process">How it works</a></li>
+          <li><a href="/#estimate">Estimate cost</a></li>
           <li><a href="renewgp-forms.html">Forms</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="/#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -603,9 +605,9 @@
   <div class="wrap footer-row">
     <div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
     <div class="footer-links">
-      <a href="index.html#services">Services</a>
+      <a href="/#services">Services</a>
       <a href="renewgp-forms.html">Forms</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="/#contact">Contact</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms and Conditions</a>
     </div>
@@ -619,7 +621,7 @@
   (function(){
     const bar = document.getElementById('announceBar');
     if(!bar) return;
-    const OPENING_DATE = new Date('2026-10-19T00:00:00');
+    const OPENING_DATE = new Date('2026-10-16T00:00:00');
     const dismissed = localStorage.getItem('renewgp_announce_dismissed');
     if(new Date() >= OPENING_DATE || dismissed){
       bar.style.display = 'none';

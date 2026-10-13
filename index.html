@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RenewGP | Vehicle Licensing &amp; Registration Services in Boksburg, Gauteng</title>
 <meta name="description" content="Need help with vehicle paperwork? RenewGP assists with licence disc renewals, registration, ownership changes, number plates, traffic fines and more across Gauteng. We queue. You cruise.">
+<link rel="canonical" href="https://renewgp.co.za/">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" href="favicon.ico">
@@ -239,8 +240,8 @@
     background:var(--line);
     border:1px solid var(--line);
   }
+  .services-wrap{ padding:0 28px; }
   @media (max-width:860px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:560px){ .services-grid{grid-template-columns:1fr;} }
   .service-btn{
     background:var(--paper);
     border:none;
@@ -289,6 +290,20 @@
     transition:transform .15s ease;
   }
   .service-btn:hover .arrow{ transform:translateX(3px); }
+  .service-btn > div{ min-width:0; }
+
+  /* Tablets & phones: two tiles per row. With an odd number of services, the last
+     tile spans the full row so no empty cell shows. */
+  @media (max-width:860px){
+    .services-grid .service-btn:last-child:nth-child(odd){ grid-column:1 / -1; }
+  }
+  @media (max-width:560px){
+    .services-wrap{ padding:0 16px; }
+    .service-btn{ padding:16px 14px; min-height:72px; gap:8px; }
+    .service-btn h3{ font-size:0.92rem; line-height:1.25; min-width:0; hyphens:auto; overflow-wrap:break-word; }
+    .service-btn .arrow{ font-size:1.05rem; }
+    .service-subnote{ font-size:0.66rem; line-height:1.3; }
+  }
 
   /* Service detail modal */
   .modal-overlay{
@@ -638,12 +653,68 @@
     html{scroll-behavior:auto;}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://renewgp.co.za/#website",
+      "url": "https://renewgp.co.za/",
+      "name": "RenewGP"
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://renewgp.co.za/#business",
+      "name": "RenewGP",
+      "description": "Vehicle licensing and registration services in Boksburg, Gauteng: licence disc renewals, registrations, change of ownership, number plates, traffic fines and more.",
+      "url": "https://renewgp.co.za/",
+      "logo": "https://renewgp.co.za/renewgp-logo.png",
+      "image": "https://renewgp.co.za/renewgp-logo.png",
+      "telephone": "+27640348539",
+      "email": "renewgp.info@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop 4, 11 Finch St, Atlasville",
+        "addressLocality": "Boksburg",
+        "addressRegion": "Gauteng",
+        "postalCode": "1459",
+        "addressCountry": "ZA"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "sameAs": [
+        "https://share.google/l06IWnVhXHWbMwO2m"
+      ],
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=11+Finch+St%2C+Atlasville%2C+Boksburg%2C+1459"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <div class="announce-bar" id="announceBar">
   <div class="announce-inner">
-    We're opening our doors on <strong>19 October 2026</strong> — <a href="#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
+    We're opening our doors on <strong>16 October 2026</strong> — <a href="#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
     <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
   </div>
 </div>
@@ -678,7 +749,7 @@
       </div>
       <div class="stat-strip">
         <div>
-          <div class="stat-num">13</div>
+          <div class="stat-num">15</div>
           <div class="stat-label">Services offered</div>
         </div>
         <div>
@@ -706,12 +777,13 @@
       <p>Tap a service to see what it costs and what to bring. More services are being added regularly — ask us if you don't see what you need.</p>
     </div>
   </div>
-  <div class="wrap" style="padding:0 28px;">
+  <div class="wrap services-wrap">
     <div class="services-grid">
       <button class="service-btn" data-service="registration"><h3>Vehicle registration</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="renewal"><h3>Vehicle license disc renewal</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="ownership"><h3>Change of ownership</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="address"><h3>Change of address</h3><span class="arrow">→</span></button>
+      <button class="service-btn" data-service="fines"><h3>Traffic fines</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="natis"><div><h3>Duplicate Natis</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></button>
       <button class="service-btn" data-service="brnc"><h3>BRNC certificates</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="deregistration"><h3>Deregistration &amp; scrapping</h3><span class="arrow">→</span></button>
@@ -719,7 +791,8 @@
       <button class="service-btn" data-service="dealer-stocking"><h3>Dealer stocking</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="number-plates"><h3>Number plates</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="trn"><div><h3>Traffic register number</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="fines"><h3>Traffic fines</h3><span class="arrow">→</span></button>
+      <button class="service-btn" data-service="double-disc"><h3>Double disc</h3><span class="arrow">→</span></button>
+      <button class="service-btn" data-service="copies"><h3>Copies &amp; lamination</h3><span class="arrow">→</span></button>
       <button class="service-btn" data-service="photos"><h3>ID &amp; learner's photos</h3><span class="arrow">→</span></button>
     </div>
   </div>
@@ -869,12 +942,15 @@
     </div>
     <div class="contact-grid">
       <div class="contact-card">
-        <h3>RenewGP — Johannesburg</h3>
+        <h3>RenewGP — Boksburg</h3>
         <div class="contact-line"><span class="lbl">Address</span> <span><a href="https://www.google.com/maps/search/?api=1&query=11+Finch+St%2C+Atlasville%2C+Boksburg%2C+1459" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);">11 Finch St, Atlasville, Boksburg, 1459</a> (Shop 4)</span></div>
         <div class="contact-line"><span class="lbl">Phone</span> <span><a href="tel:+27640348539" style="color:rgba(255,255,255,0.85);">+27 64 034 8539</a> · <a href="tel:+27742972420" style="color:rgba(255,255,255,0.85);">+27 74 297 2420</a><br><small style="color:rgba(255,255,255,0.55); font-size:0.75rem;">Rishi Reddy</small></span></div>
         <div class="contact-line"><span class="lbl">WhatsApp</span> <span><a href="https://wa.me/message/I673V63EUONFB1" target="_blank" rel="noopener" style="color:var(--gold-light);">Chat with us on WhatsApp</a></span></div>
         <div class="contact-line"><span class="lbl">Email</span> <span><a href="mailto:renewgp.info@gmail.com" style="color:rgba(255,255,255,0.85);">renewgp.info@gmail.com</a></span></div>
         <div class="contact-line"><span class="lbl">Hours</span> <span>Mon – Fri: 09H00 – 18H00 · Sat: 08H00 – 13H00 · Sun: Closed</span></div>
+        <div style="margin-top:18px;">
+          <a id="reviewBtn" class="btn btn-outline" href="https://share.google/l06IWnVhXHWbMwO2m" target="_blank" rel="noopener" style="display:none;">&#9733; Review us on Google</a>
+        </div>
       </div>
     </div>
   </div>
@@ -911,7 +987,7 @@
   (function(){
     const bar = document.getElementById('announceBar');
     if(!bar) return;
-    const OPENING_DATE = new Date('2026-10-19T00:00:00');
+    const OPENING_DATE = new Date('2026-10-16T00:00:00');
     const dismissed = localStorage.getItem('renewgp_announce_dismissed');
     if(new Date() >= OPENING_DATE || dismissed){
       bar.style.display = 'none';
@@ -921,6 +997,15 @@
       bar.style.display = 'none';
       localStorage.setItem('renewgp_announce_dismissed', '1');
     });
+  })();
+
+  // ---------- REVIEW BUTTON (appears on opening day) ----------
+  (function(){
+    const btn = document.getElementById('reviewBtn');
+    if(!btn) return;
+    if(new Date() >= new Date('2026-10-16T00:00:00')){
+      btn.style.display = 'inline-flex';
+    }
   })();
 
   // ---------- SERVICE DETAILS MODAL ----------
@@ -1255,7 +1340,7 @@
             'A company letterhead nominating a proxy and representative, signed and agreed by both'
           ],
           forms: ['ABR – Application and Notice of Business Register Number'],
-          serviceFee: 'R500',
+          serviceFee: 'R1000',
           processingTime: '1–4 days'
         },
         {
@@ -1274,7 +1359,7 @@
             'ABR – Application and Notice of Business Register Number',
             'DCT – Declaration in Respect of Lost Documents'
           ],
-          serviceFee: 'R500',
+          serviceFee: 'R1000',
           processingTime: '1–4 days'
         }
       ]
@@ -1294,7 +1379,7 @@
           ],
           forms: ['ADV – Application for Deregistration of Vehicle'],
           govFee: ['R72 – Licensing department admin fee'],
-          serviceFee: 'R400',
+          serviceFee: 'R500',
           processingTime: '4 days',
           note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
         },
@@ -1308,7 +1393,7 @@
           ],
           forms: ['NCO – Notification of Change of Ownership / Sale'],
           govFee: ['R72 – Licensing department admin fee'],
-          serviceFee: 'R400',
+          serviceFee: 'R500',
           processingTime: '4 days',
           note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
         }
@@ -1326,7 +1411,7 @@
           ],
           forms: ['MTN1 – Application and Notice i.r.o. Motor Trade Number and Blank Temporary Permits'],
           govFee: ['R876 – Licensing department fee'],
-          serviceFee: 'R450',
+          serviceFee: 'R500',
           processingTime: '5 days'
         }
       ]
@@ -1349,7 +1434,7 @@
             'RLV – Application for Registration & Licensing of Motor Vehicle — complete Sections A and C'
           ],
           govFee: ['R228 – Dealerstock fee'],
-          serviceFee: 'R400',
+          serviceFee: 'R500',
           processingTime: '4 days',
           note: "The annual licence fee (plus any penalties) may also apply on top of the fees above. No licence fee is charged if it's already up to date; a pro-rated fee applies if it's still valid; and if it's expired, monthly fees and penalties apply, plus the new annual fee. All licensing fees must be paid in full before a vehicle can be dealerstocked."
         },
@@ -1365,7 +1450,7 @@
             'RLV – Application for Registration & Licensing of Motor Vehicle — complete Sections A and C'
           ],
           govFee: ['R228 – Dealerstock fee'],
-          serviceFee: 'R400',
+          serviceFee: 'R500',
           processingTime: '4 days',
           note: "The annual licence fee (plus any penalties) may also apply on top of the fees above. No licence fee is charged if it's already up to date; a pro-rated fee applies if it's still valid; and if it's expired, monthly fees and penalties apply, plus the new annual fee. All licensing fees must be paid in full before a vehicle can be dealerstocked."
         }
@@ -1383,10 +1468,10 @@
           ],
           feeListLabel: 'Number plate pricing',
           govFee: [
-            '440 x 113mm — R180 single / R380 set',
-            '520 x 113mm — R180 single / R380 set',
-            '250 x 205mm — R180 single',
-            '250 x 165mm — R180 single',
+            '440 x 113mm — R190 single / R380 set',
+            '520 x 113mm — R190 single / R380 set',
+            '250 x 205mm — R190 single',
+            '250 x 165mm — R190 single',
             'Backing plates — R80'
           ],
           serviceFee: 'Included in the plate price above',
@@ -1461,6 +1546,37 @@
           ],
           processingTime: 'A few minutes',
           serviceFee: 'See pricing above'
+        }
+      ]
+    },
+    'double-disc': {
+      title: 'Double disc',
+      intro: "A \"double disc\" is a valid vehicle licence disc paired with a roadworthy certificate — the two documents e-hailing drivers (such as Uber and Bolt) are commonly asked to provide for their vehicle. RenewGP takes care of the paperwork and the queuing for you.",
+      variants: [
+        {
+          documents: [
+            'Clear copy of your ID document',
+            'Roadworthy certificate',
+            'Proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
+          ],
+          serviceFee: 'R500',
+          processingTime: '1–4 days'
+        }
+      ]
+    },
+    'copies': {
+      title: 'Copies & lamination',
+      intro: 'Need documents copied or protected? We offer A4 black-and-white and colour copies, as well as A4 and A3 lamination.',
+      variants: [
+        {
+          feeListLabel: 'Pricing',
+          govFee: [
+            'A4 black-and-white copies — R2 per copy',
+            'A4 colour copies — R6.50 per copy',
+            'Bulk copying — enquire for a quote',
+            'A4 lamination — R15',
+            'A3 lamination — R19'
+          ]
         }
       ]
     }
