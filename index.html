@@ -1341,6 +1341,7 @@
           ],
           forms: ['ABR – Application and Notice of Business Register Number'],
           serviceFee: 'R1000',
+          feeLabel: 'Government + RenewGP fee',
           processingTime: '1–4 days'
         },
         {
@@ -1360,6 +1361,7 @@
             'DCT – Declaration in Respect of Lost Documents'
           ],
           serviceFee: 'R1000',
+          feeLabel: 'Government + RenewGP fee',
           processingTime: '1–4 days'
         }
       ]
@@ -1378,8 +1380,8 @@
             'Proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
           ],
           forms: ['ADV – Application for Deregistration of Vehicle'],
-          govFee: ['R72 – Licensing department admin fee'],
-          serviceFee: 'R500',
+          serviceFee: 'R572',
+          feeLabel: 'Government + RenewGP fee',
           processingTime: '4 days',
           note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
         },
@@ -1392,8 +1394,8 @@
             "Copy of the current owner's ID document (the person the vehicle was sold to)"
           ],
           forms: ['NCO – Notification of Change of Ownership / Sale'],
-          govFee: ['R72 – Licensing department admin fee'],
-          serviceFee: 'R500',
+          serviceFee: 'R572',
+          feeLabel: 'Government + RenewGP fee',
           processingTime: '4 days',
           note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
         }
@@ -1541,7 +1543,7 @@
         {
           feeListLabel: 'Photo pricing',
           govFee: [
-            'Standard 35x45mm, set of 6 — R80',
+            'Standard 35x45mm, set of 6 — R75',
             'Custom sizes (passport, visa, etc.) — R100'
           ],
           processingTime: 'A few minutes',
@@ -1560,6 +1562,7 @@
             'Proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
           ],
           serviceFee: 'R500',
+          feeLabel: 'Government + RenewGP fee',
           processingTime: '1–4 days'
         }
       ]
@@ -1574,7 +1577,7 @@
             'A4 black-and-white copies — R2 per copy',
             'A4 colour copies — R6.50 per copy',
             'Bulk copying — enquire for a quote',
-            'A4 lamination — R15',
+            'A4 lamination — R14.50',
             'A3 lamination — R19'
           ]
         }
@@ -1629,7 +1632,7 @@
     }
     if(variant.serviceFee || variant.processingTime){
       html += `<div class="modal-summary">
-        <div class="modal-summary-item"><div class="amt">${escapeHtml(variant.serviceFee || '—')}</div><div class="lbl">RenewGP service fee</div></div>
+        <div class="modal-summary-item"><div class="amt">${escapeHtml(variant.serviceFee || '—')}</div><div class="lbl">${escapeHtml(variant.feeLabel || 'RenewGP service fee')}</div></div>
         <div class="modal-summary-item"><div class="amt">${escapeHtml(variant.processingTime || '—')}</div><div class="lbl">Processing time</div></div>
       </div>`;
     }
