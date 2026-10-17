@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vehicle Licensing &amp; Registration Forms (ALV, RLV, NCO) | RenewGP</title>
-<meta name="description" content="Download the vehicle licensing and registration forms you need, handled by RenewGP in Johannesburg.">
+<meta name="description" content="Download the vehicle licensing and registration forms you need, handled by RenewGP in Boksburg.">
 <link rel="canonical" href="https://renewgp.co.za/renewgp-forms.html">
+<script>(function(){try{if(new Date()>=new Date('2026-10-16T00:00:00')||localStorage.getItem('renewgp_announce_dismissed')){document.documentElement.className+=' no-announce';}}catch(e){}})();</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" href="favicon.ico">
@@ -82,6 +83,11 @@
   @media (max-width:600px){
     .announce-inner{ font-size:0.78rem; padding:0 32px; }
   }
+
+  .no-announce #announceBar{display:none;}
+
+  .skip{position:absolute;left:-9999px;top:8px;z-index:200;background:#F5C542;color:#052A63;padding:10px 16px;font-weight:700;border-radius:3px;text-decoration:none;}
+  .skip:focus{left:16px;}
 
   /* ---------- NAV ---------- */
   header{
@@ -497,13 +503,14 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to main content</a>
 
-<div class="announce-bar" id="announceBar">
+<section class="announce-bar" id="announceBar" aria-label="Announcement">
   <div class="announce-inner">
     We're opening our doors on <strong>16 October 2026</strong> — <a href="/#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
-    <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+    <button type="button" class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
   </div>
-</div>
+</section>
 
 <header>
   <div class="navwrap">
@@ -519,9 +526,10 @@
         </ul>
       </nav>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
   </div>
 </header>
+<main id="main">
 
 <section style="background:var(--navy-deep); padding:56px 0 44px; border-bottom:1px solid rgba(245,197,66,0.25);">
   <div class="wrap">
@@ -543,7 +551,7 @@
       </div>
       <div class="form-row" id="form-ALV">
         <div>
-          <div class="fname"><span class="form-badge" style="background:#4CAF50;">ALV</span> Application for Licensing of Motor Vehicle</div>
+          <div class="fname"><span class="form-badge" style="background:#2E7D32;">ALV</span> Application for Licensing of Motor Vehicle</div>
           <div class="fmeta">Annual licence disc renewal, including renewals made after expiry</div>
         </div>
         <a href="forms/ALV-Application-for-Licensing-of-motor-Vehicle-or-renewal.pdf" class="form-download" download>Download PDF</a>
@@ -557,7 +565,7 @@
       </div>
       <div class="form-row" id="form-NCP">
         <div>
-          <div class="fname"><span class="form-badge" style="background:#E05252;">NCP</span> Notification of Change of Address or Particulars</div>
+          <div class="fname"><span class="form-badge" style="background:#C62828;">NCP</span> Notification of Change of Address or Particulars</div>
           <div class="fmeta">Updates your address or personal details with the licensing department</div>
         </div>
         <a href="forms/NCP-Notification-of-Change-of-Address-or-particulars-of-person-or-organisation.pdf" class="form-download" download>Download PDF</a>
@@ -610,6 +618,8 @@
 </section>
 
 
+</main>
+
 <footer>
   <div class="wrap footer-row">
     <div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
@@ -617,8 +627,8 @@
       <a href="/#services">Services</a>
       <a href="renewgp-forms.html">Forms</a>
       <a href="/#contact">Contact</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms-and-conditions.html">Terms and Conditions</a>
+      <a href="/#privacy" data-legal="privacy">Privacy Policy</a>
+      <a href="/#terms" data-legal="terms">Terms and Conditions</a>
     </div>
   </div>
 </footer>
@@ -654,6 +664,8 @@
 </script>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ead145842f3243ecb1f7e72a20333ebd"}'></script><!-- End Cloudflare Web Analytics -->
+
+<script src="legal.js" defer></script>
 
 </body>
 </html>

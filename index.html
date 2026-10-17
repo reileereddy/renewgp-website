@@ -6,6 +6,8 @@
 <title>RenewGP | Vehicle Licensing &amp; Registration Services in Boksburg, Gauteng</title>
 <meta name="description" content="Need help with vehicle paperwork? RenewGP assists with licence disc renewals, registration, ownership changes, number plates, traffic fines and more across Gauteng. We queue. You cruise.">
 <link rel="canonical" href="https://renewgp.co.za/">
+<link rel="preload" as="image" href="renewgp-logo-hero.webp" type="image/webp" fetchpriority="high">
+<script>(function(){try{if(new Date()>=new Date('2026-10-16T00:00:00')||localStorage.getItem('renewgp_announce_dismissed')){document.documentElement.className+=' no-announce';}}catch(e){}})();</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" href="favicon.ico">
@@ -82,6 +84,11 @@
   @media (max-width:600px){
     .announce-inner{ font-size:0.78rem; padding:0 32px; }
   }
+
+  .no-announce #announceBar{display:none;}
+
+  .skip{position:absolute;left:-9999px;top:8px;z-index:200;background:#F5C542;color:#052A63;padding:10px 16px;font-weight:700;border-radius:3px;text-decoration:none;}
+  .skip:focus{left:16px;}
 
   /* ---------- NAV ---------- */
   header{
@@ -211,14 +218,21 @@
     display:flex;align-items:center;justify-content:center;
     padding:20px;
   }
-  .hero-logo-img{
+  .hero-logo-card picture{
+    display:block;
     width:100%;
     max-width:460px;
+  }
+  .hero-logo-img{
+    display:block;
+    width:100%;
     height:auto;
+    aspect-ratio:920 / 307;
+    background:#073B8C;
   }
   @media (max-width:860px){
     .hero-logo-card{padding:0; margin-top:8px;}
-    .hero-logo-img{max-width:320px; margin:0 auto;}
+    .hero-logo-card picture{max-width:320px; margin:0 auto;}
   }
 
 
@@ -245,6 +259,8 @@
   .service-btn{
     background:var(--paper);
     border:none;
+    text-decoration:none;
+    color:inherit;
     padding:26px 24px;
     min-height:88px;
     display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -304,140 +320,6 @@
     .service-btn .arrow{ font-size:1.05rem; }
     .service-subnote{ font-size:0.66rem; line-height:1.3; }
   }
-
-  /* Service detail modal */
-  .modal-overlay{
-    position:fixed; inset:0;
-    background:rgba(5,17,45,0.62);
-    display:none;
-    align-items:center; justify-content:center;
-    padding:20px;
-    z-index:1000;
-  }
-  .modal-overlay.open{ display:flex; }
-  .modal-box{
-    background:var(--paper);
-    max-width:560px; width:100%;
-    max-height:85vh; overflow-y:auto;
-    border-radius:6px;
-    padding:38px 38px 32px;
-    position:relative;
-    border-top:4px solid var(--gold);
-    box-shadow:0 24px 60px rgba(5,17,45,0.35);
-    transform:translateY(10px) scale(0.98);
-    opacity:0;
-    transition:transform .18s ease, opacity .18s ease;
-  }
-  .modal-overlay.open .modal-box{
-    transform:translateY(0) scale(1);
-    opacity:1;
-  }
-  .modal-close{
-    position:absolute; top:18px; right:18px;
-    background:none; border:none;
-    font-size:1.6rem; line-height:1;
-    color:#8a8d97; cursor:pointer;
-    padding:6px;
-    border-radius:50%;
-    transition:background-color .15s ease, color .15s ease;
-  }
-  .modal-close:hover{ color:var(--navy-deep); background:var(--cream); }
-  .modal-box h3{
-    font-family:'Fraunces', serif;
-    font-size:1.5rem;
-    color:var(--navy-deep);
-    max-width:22ch;
-    padding-right:20px;
-  }
-  .modal-section{ margin-top:22px; }
-  .modal-label{
-    font-size:0.72rem; font-weight:700;
-    letter-spacing:0.07em; text-transform:uppercase;
-    color:var(--navy-mid);
-    margin-bottom:8px;
-    display:flex; align-items:center; gap:7px;
-  }
-  .modal-label::before{
-    content:"";
-    width:5px; height:5px;
-    background:var(--gold);
-    border-radius:50%;
-    display:inline-block;
-    flex-shrink:0;
-  }
-  .modal-section p{
-    color:#4a4d58; font-size:0.94rem; margin:0; line-height:1.6;
-  }
-  .modal-alert{
-    background:var(--cream);
-    border-left:3px solid var(--gold);
-    padding:14px 18px;
-    font-size:0.88rem;
-    color:#4a4d58;
-    margin:0 0 20px;
-    border-radius:0 3px 3px 0;
-  }
-  .modal-alert strong{ color:var(--navy-deep); }
-  .modal-intro{
-    color:#4a4d58; font-size:0.96rem; margin:0 0 6px; line-height:1.65;
-  }
-  .modal-intro-cta{
-    display:inline-flex; align-items:center; gap:6px;
-    margin-top:12px; margin-bottom:6px;
-    font-size:0.88rem; font-weight:600;
-    color:var(--navy-mid);
-    text-decoration:none;
-    border-bottom:1px solid var(--gold);
-    padding-bottom:1px;
-  }
-  .modal-intro-cta:hover{ color:var(--navy-deep); }
-  .modal-variant-title{
-    font-family:'Fraunces', serif;
-    color:var(--navy-deep);
-    font-size:1.12rem;
-    margin-top:30px;
-    padding-top:22px;
-    border-top:1px solid var(--line);
-  }
-  .modal-list{
-    margin:0; padding-left:19px;
-    color:#4a4d58; font-size:0.94rem; line-height:1.6;
-  }
-  .modal-list li{ margin-bottom:7px; }
-  .modal-list a{ color:var(--navy-mid); font-weight:600; text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:2px; }
-  .modal-list a:hover{ color:var(--navy-deep); }
-  .modal-alert{
-    background:var(--cream);
-    border-left:3px solid var(--gold);
-    padding:14px 18px;
-    font-size:0.9rem;
-    color:#4a4d58;
-    margin-top:18px;
-    line-height:1.55;
-  }
-  .modal-summary{
-    display:flex; gap:12px; margin-top:22px; flex-wrap:wrap;
-  }
-  .modal-summary-item{
-    flex:1; min-width:130px;
-    background:var(--cream);
-    border:1px solid var(--line);
-    border-radius:5px;
-    padding:14px 16px;
-  }
-  .modal-summary-item .amt{
-    font-family:'Fraunces', serif;
-    font-size:1.2rem; font-weight:600;
-    color:var(--navy-deep);
-    line-height:1.2;
-  }
-  .modal-summary-item .lbl{
-    font-size:0.7rem; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.05em;
-    color:var(--navy-mid);
-    margin-top:5px;
-  }
-  .modal-cta{ margin-top:30px; }
 
   /* ---------- PROCESS ---------- */
   .process{
@@ -704,20 +586,147 @@
       "sameAs": [
         "https://share.google/l06IWnVhXHWbMwO2m"
       ],
-      "hasMap": "https://www.google.com/maps/search/?api=1&query=11+Finch+St%2C+Atlasville%2C+Boksburg%2C+1459"
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=11+Finch+St%2C+Atlasville%2C+Boksburg%2C+1459",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "RenewGP services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vehicle registration",
+              "url": "https://renewgp.co.za/vehicle-registration.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Licence disc renewal",
+              "url": "https://renewgp.co.za/licence-disc-renewal.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Change of ownership",
+              "url": "https://renewgp.co.za/change-of-ownership.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Change of address",
+              "url": "https://renewgp.co.za/change-of-address.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AARTO traffic fines",
+              "url": "https://renewgp.co.za/traffic-fines.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Duplicate Natis (RC1)",
+              "url": "https://renewgp.co.za/duplicate-natis.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "BRNC certificates",
+              "url": "https://renewgp.co.za/brnc-certificates.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vehicle deregistration & scrapping",
+              "url": "https://renewgp.co.za/deregistration-scrapping.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Trade plates",
+              "url": "https://renewgp.co.za/trade-plates.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dealer stock applications",
+              "url": "https://renewgp.co.za/dealer-stocking.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Number plates",
+              "url": "https://renewgp.co.za/number-plates.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Traffic Register Number help",
+              "url": "https://renewgp.co.za/traffic-register-number.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Double disc",
+              "url": "https://renewgp.co.za/double-disc.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Copies & lamination",
+              "url": "https://renewgp.co.za/copies-lamination.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "ID & learner's photos",
+              "url": "https://renewgp.co.za/id-learners-photos.html"
+            }
+          }
+        ]
+      }
     }
   ]
 }
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to main content</a>
 
-<div class="announce-bar" id="announceBar">
+<section class="announce-bar" id="announceBar" aria-label="Announcement">
   <div class="announce-inner">
     We're opening our doors on <strong>16 October 2026</strong> — <a href="#contact" style="color:var(--navy-deep); text-decoration:underline;">Contact us</a> today.
-    <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+    <button type="button" class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
   </div>
-</div>
+</section>
 
 <header>
   <div class="navwrap">
@@ -733,9 +742,10 @@
         </ul>
       </nav>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
   </div>
 </header>
+<main id="main">
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
@@ -764,7 +774,10 @@
     </div>
 
     <div class="hero-logo-card">
-      <img src="renewgp-logo.png" alt="RenewGP — We queue. You cruise." class="hero-logo-img">
+      <picture>
+        <source srcset="renewgp-logo-hero.webp" type="image/webp">
+        <img src="renewgp-logo-hero.png" alt="RenewGP — We queue. You cruise." class="hero-logo-img" width="920" height="307" fetchpriority="high" decoding="async">
+      </picture>
     </div>
   </div>
 </section>
@@ -779,21 +792,21 @@
   </div>
   <div class="wrap services-wrap">
     <div class="services-grid">
-      <button class="service-btn" data-service="registration"><h3>Vehicle registration</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="renewal"><h3>Vehicle license disc renewal</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="ownership"><h3>Change of ownership</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="address"><h3>Change of address</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="fines"><h3>Traffic fines</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="natis"><div><h3>Duplicate Natis</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="brnc"><h3>BRNC certificates</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="deregistration"><h3>Deregistration &amp; scrapping</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="trade-plates"><h3>Trade plates</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="dealer-stocking"><h3>Dealer stocking</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="number-plates"><h3>Number plates</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="trn"><div><h3>Traffic register number</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="double-disc"><h3>Double disc</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="copies"><h3>Copies &amp; lamination</h3><span class="arrow">→</span></button>
-      <button class="service-btn" data-service="photos"><h3>ID &amp; learner's photos</h3><span class="arrow">→</span></button>
+      <a class="service-btn" href="vehicle-registration.html"><h3>Vehicle registration</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="licence-disc-renewal.html"><h3>Vehicle license disc renewal</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="change-of-ownership.html"><h3>Change of ownership</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="change-of-address.html"><h3>Change of address</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="traffic-fines.html"><h3>Traffic fines</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="duplicate-natis.html"><div><h3>Duplicate Natis</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></a>
+      <a class="service-btn" href="brnc-certificates.html"><h3>BRNC certificates</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="deregistration-scrapping.html"><h3>Deregistration &amp; scrapping</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="trade-plates.html"><h3>Trade plates</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="dealer-stocking.html"><h3>Dealer stocking</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="number-plates.html"><h3>Number plates</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="traffic-register-number.html"><div><h3>Traffic register number</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></a>
+      <a class="service-btn" href="double-disc.html"><h3>Double disc</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="copies-lamination.html"><h3>Copies &amp; lamination</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="id-learners-photos.html"><h3>ID &amp; learner's photos</h3><span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -944,7 +957,7 @@
       <div class="contact-card">
         <h3>RenewGP — Boksburg</h3>
         <div class="contact-line"><span class="lbl">Address</span> <span><a href="https://www.google.com/maps/search/?api=1&query=11+Finch+St%2C+Atlasville%2C+Boksburg%2C+1459" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);">11 Finch St, Atlasville, Boksburg, 1459</a> (Shop 4)</span></div>
-        <div class="contact-line"><span class="lbl">Phone</span> <span><a href="tel:+27640348539" style="color:rgba(255,255,255,0.85);">+27 64 034 8539</a> · <a href="tel:+27742972420" style="color:rgba(255,255,255,0.85);">+27 74 297 2420</a><br><small style="color:rgba(255,255,255,0.55); font-size:0.75rem;">Rishi Reddy</small></span></div>
+        <div class="contact-line"><span class="lbl">Phone</span> <span><a href="tel:+27640348539" style="color:rgba(255,255,255,0.85);">+27 64 034 8539</a> · <a href="tel:+27742972420" style="color:rgba(255,255,255,0.85);">+27 74 297 2420</a><br><small style="color:rgba(255,255,255,0.8); font-size:0.75rem;">Rishi Reddy</small></span></div>
         <div class="contact-line"><span class="lbl">WhatsApp</span> <span><a href="https://wa.me/message/I673V63EUONFB1" target="_blank" rel="noopener" style="color:var(--gold-light);">Chat with us on WhatsApp</a></span></div>
         <div class="contact-line"><span class="lbl">Email</span> <span><a href="mailto:renewgp.info@gmail.com" style="color:rgba(255,255,255,0.85);">renewgp.info@gmail.com</a></span></div>
         <div class="contact-line"><span class="lbl">Hours</span> <span>Mon – Fri: 09H00 – 18H00 · Sat: 08H00 – 13H00 · Sun: Closed</span></div>
@@ -956,6 +969,8 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap footer-row">
     <div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
@@ -963,22 +978,11 @@
       <a href="#services">Services</a>
       <a href="renewgp-forms.html">Forms</a>
       <a href="#contact">Contact</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms-and-conditions.html">Terms and Conditions</a>
+      <a href="/#privacy" data-legal="privacy">Privacy Policy</a>
+      <a href="/#terms" data-legal="terms">Terms and Conditions</a>
     </div>
   </div>
 </footer>
-
-<div class="modal-overlay" id="service-modal">
-  <div class="modal-box">
-    <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
-    <h3 id="modal-title">Service name</h3>
-    <div id="modal-body"></div>
-    <div class="modal-cta">
-      <a href="#contact" class="btn btn-primary" style="width:100%; justify-content:center;">Contact us about this</a>
-    </div>
-  </div>
-</div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1007,681 +1011,6 @@
       btn.style.display = 'inline-flex';
     }
   })();
-
-  // ---------- SERVICE DETAILS MODAL ----------
-  // Each service has an optional shared "intro" (plus an optional "introCta" link),
-  // and one or more "variants" — most services have just one; some need more.
-
-  // Maps a form code (as it appears at the start of a "forms" entry) to its anchor
-  // on the Forms page, so the name becomes a clickable link straight to that form.
-  const FORM_LINKS = {
-    'RLV':  'renewgp-forms.html#form-RLV',
-    'ALV':  'renewgp-forms.html#form-ALV',
-    'NCO':  'renewgp-forms.html#form-NCO',
-    'NCP':  'renewgp-forms.html#form-NCP',
-    'DRC':  'renewgp-forms.html#form-DRC',
-    'ADV':  'renewgp-forms.html#form-ADV',
-    'ANR':  'renewgp-forms.html#form-ANR',
-    'ABR':  'renewgp-forms.html#form-ABR',
-    'MTN1': 'renewgp-forms.html#form-MTN1',
-    'DCT':  'renewgp-forms.html#form-DCT'
-  };
-
-  const PLACEHOLDER_VARIANT = {
-    description: 'Details coming soon.',
-    documents: ['Details coming soon.'],
-    forms: ['Details coming soon.'],
-    govFee: ['Details coming soon.'],
-    serviceFee: 'Details coming soon.',
-    processingTime: 'Details coming soon.'
-  };
-
-  // Shared across every Change of Ownership category — only the documents differ.
-  const OWNERSHIP_FORMS = [
-    'NCO – Notification of Change of Ownership / Sale (seller completes Section A; buyer completes Sections B & C)',
-    'RLV – Application for Registration & Licensing of Motor Vehicle (buyer completes Sections A & C)'
-  ];
-  const OWNERSHIP_GOV_FEE = [
-    'R228 – Licensing department registration fee',
-    'R72 – Licensing department admin fee'
-  ];
-  const OWNERSHIP_SERVICE_FEE = 'R180';
-  const OWNERSHIP_PROCESSING_TIME = '1–4 days';
-
-  const SERVICE_DETAILS = {
-    'registration': {
-      title: 'Vehicle registration',
-      intro: "In South Africa, every vehicle must be registered with the relevant district licensing department. Vehicle registration is not the same as vehicle licensing — without a registered vehicle, you can't get a licence disc, and driving an unregistered vehicle on public roads can result in a fine. There are two types of registration, depending on whether the vehicle is new or already owned:",
-      variants: [
-        {
-          name: 'New vehicle registration',
-          documents: [
-            'Your ID document copy',
-            'RC1 (logbook)',
-            'Roadworthy certificate — if the vehicle is a heavy load or Road Transport Quality System (RTQS) vehicle',
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead"
-          ],
-          forms: ['RLV – Application for Registration & Licensing of Motor Vehicle'],
-          govFee: [
-            'R228 – Licensing department registration fee',
-            'R72 – Licensing department admin fee',
-            "Annual licence fee — pro-rata, based on your vehicle's weight and licence disc expiry date"
-          ],
-          serviceFee: 'R180',
-          processingTime: '1–4 days'
-        },
-        {
-          name: 'Pre-owned vehicle registration (change of ownership)',
-          documents: [
-            'RC1 (logbook)',
-            "Previous owner's ID document copy",
-            'Roadworthy certificate — required if ownership is changing between private/company combinations, or from a deceased estate',
-            "New owner's ID document copy",
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead"
-          ],
-          forms: [
-            'RLV – Application for Registration & Licensing of Motor Vehicle',
-            'NCO – Notification of Change of Ownership / Sale'
-          ],
-          govFee: [
-            'R228 – Licensing department registration fee',
-            'R72 – Licensing department admin fee'
-          ],
-          serviceFee: 'R180',
-          processingTime: '1–4 days'
-        }
-      ]
-    },
-    'renewal': {
-      title: 'Vehicle license disc renewal',
-      intro: "It's time to renew your motor vehicle licence disc, and you don't want to be stuck queuing at the licensing department. Lucky for you, RenewGP will queue for you! To make things even easier, we've built a calculator further down this page to estimate your licence disc renewal fees before you commit.",
-      introCta: { text: 'Try the estimate calculator', href: '#estimate' },
-      variants: [
-        {
-          name: 'Personal renewal',
-          documents: [
-            'Copy of your previous licence disc (showing tare and expiry date), to confirm your estimated renewal cost',
-            "Clear copy of the owner's identity document",
-            'Proof of address: a bank statement or municipal utility bill (City of Joburg, Mogale City, or City of Tshwane), not older than 3 months — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            'Roadworthy certificate — only required if your vehicle is used for public transport or is a heavy load vehicle'
-          ],
-          forms: ['ALV – Application for Licensing of Motor Vehicle'],
-          govFee: [
-            'R72 – Licensing department admin fee',
-            "Annual licensing fee — calculated based on your vehicle's mass",
-            "Penalties & arrears — calculated based on your licence disc's expiry date"
-          ],
-          serviceFee: 'R180',
-          processingTime: '1–4 days'
-        },
-        {
-          name: 'Business renewal',
-          documents: [
-            'Copy of your previous licence disc (showing tare and expiry date), to confirm your estimated renewal cost',
-            "Clear copy of the company proxy's identity document",
-            'Copy of the BRN (Business Register Number) certificate',
-            'Roadworthy certificate — only required if your vehicle is used for public transport or is a heavy load vehicle'
-          ],
-          forms: ['ALV – Application for Licensing of Motor Vehicle'],
-          govFee: [
-            'R72 – Licensing department admin fee',
-            "Annual licensing fee — calculated based on your vehicle's mass",
-            "Penalties & arrears — calculated based on your licence disc's expiry date"
-          ],
-          serviceFee: 'R180',
-          processingTime: '1–4 days'
-        }
-      ]
-    },
-    'ownership': {
-      title: 'Change of ownership',
-      intro: "There are several categories of change of ownership, depending on who's selling and who's buying. If you've purchased a pre-owned vehicle, an NCO must be completed alongside your vehicle's registration. Change of ownership means the current titleholder is updated on the vehicle's registration certificate, and the new titleholder is registered on the National Traffic Information System (eNaTIS). Select the category that matches your situation:",
-      variants: [
-        {
-          name: 'Bank to private',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's ID document copy",
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            'Bank settlement letter (stamped and signed by the bank)',
-            "Bank proxy's ID document copy"
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'Bank to private company',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's ID document copy",
-            "New owner's BRNC (Business Register Number Certificate)",
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            "Bank's BRNC",
-            'Bank settlement letter (stamped and signed by the bank)',
-            "Bank proxy's ID document copy"
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'Company to company',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's company proxy ID document copy",
-            "New owner's BRNC",
-            'Company proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "Previous owner's BRNC",
-            "Previous owner's company proxy ID document copy",
-            'Roadworthy certificate'
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'Company to private',
-          documents: [
-            'Original green Natis (RC1)',
-            "Previous owner's company proxy ID document copy",
-            "Previous owner's BRNC",
-            "New owner's ID document copy",
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            "Previous owner's ID document copy",
-            'Roadworthy certificate',
-            'Signed affidavit — completed in person at our offices'
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'Private to company',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's company proxy ID document copy",
-            "Previous owner's ID document copy",
-            "New owner's BRNC",
-            'Company proof of address (utility bill or first page of a bank statement)',
-            "Previous owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            'Roadworthy certificate'
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'Private to private',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's ID document copy",
-            "New owner's proof of address (utility bill or first page of a bank statement)",
-            "Previous owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            "Previous owner's ID document copy",
-            'Roadworthy certificate'
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        },
-        {
-          name: 'From a deceased estate',
-          documents: [
-            'Original green Natis (RC1)',
-            "New owner's ID document copy",
-            "New owner's proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead",
-            "Previous owner's ID document copy",
-            'Letter of executor',
-            "Executor's ID document copy",
-            'Roadworthy certificate'
-          ],
-          forms: OWNERSHIP_FORMS,
-          govFee: OWNERSHIP_GOV_FEE,
-          serviceFee: OWNERSHIP_SERVICE_FEE,
-          processingTime: OWNERSHIP_PROCESSING_TIME
-        }
-      ]
-    },
-    'address': {
-      title: 'Change of address',
-      intro: "Whether you've moved office or moved house, updating the address on your vehicle's registration certificate shouldn't mean standing in a long queue. RenewGP handles the queuing on your behalf, so your personal or company vehicle details are kept up to date without the hassle.",
-      variants: [
-        {
-          name: 'South African citizens',
-          documents: [
-            'Clear copy of your identity document',
-            'Proof of residential or company address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
-          ],
-          forms: ['NCP – Notification of Change of Address or Particulars of Person or Organisation'],
-          govFee: [
-            'R72 – Licensing department admin fee',
-            'R150 – Licensing department registration fee'
-          ],
-          serviceFee: 'R180',
-          processingTime: '4 days'
-        },
-        {
-          name: 'Foreigners',
-          documents: [
-            'Original and certified copy of your identity document, issued by your country of origin',
-            'Temporary residence permit',
-            'Proof of residential or company address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            'Certificate of Incorporation or Name Change issued under the Companies Act, or a founding statement (for company vehicles)'
-          ],
-          forms: [
-            'NCP – Notification of Change of Address or Particulars of Person or Organisation',
-            'ANR – Application and Notice of Traffic Register Number (foreigners only)'
-          ],
-          govFee: [
-            'R72 – Licensing department admin fee',
-            'R150 – Licensing department registration fee'
-          ],
-          serviceFee: 'R180',
-          processingTime: '4 days'
-        }
-      ]
-    },
-    'natis': {
-      title: 'Duplicate Natis certificate',
-      notice: "<strong>We can't process this one on your behalf.</strong> A duplicate NaTIS (RC1) certificate can only be requested by the vehicle's owner, in person, at the licensing department. We've included what you'll need below to help you prepare for your own visit.",
-      variants: [
-        {
-          name: 'For an individual',
-          documents: [
-            'Copy of your RC1 / eNaTIS document, if you have one',
-            "Copy of the owner's ID (original ID card or green ID book)",
-            'Proof of address (utility bill or bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            'Signed affidavit, completed in person at the licensing department'
-          ],
-          forms: ['DRC – Application for Duplicate Registration / Deregistration Certificate'],
-          govFee: ['Not specified by the licensing department — please confirm the current fee when you apply'],
-          serviceFee: 'Not applicable',
-          processingTime: 'Set by the licensing department'
-        },
-        {
-          name: 'For a company',
-          documents: [
-            'Copy of your RC1 / eNaTIS document, if you have one',
-            "Copy of the company's BRN certificate",
-            "Copy of the proxy's ID",
-            "SARS document confirming the company's VAT number",
-            'A company letterhead nominating a proxy and representative, signed and agreed by both',
-            'Proof of company address (utility bill or bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "If the company operates from a home address: a letterhead stating the property owner's details, along with their ID copy and proof of address",
-            'Signed affidavit, completed in person at the licensing department'
-          ],
-          forms: ['DRC – Application for Duplicate Registration / Deregistration Certificate'],
-          govFee: ['Not specified by the licensing department — please confirm the current fee when you apply'],
-          serviceFee: 'Not applicable',
-          processingTime: 'Set by the licensing department'
-        }
-      ]
-    },
-    'brnc': {
-      title: 'BRNC certificates',
-      intro: "A Business Register Number Certificate (BRNC) works like an ID document for a business. If you want to register a vehicle under your business's name, you'll need one of these first. RenewGP can help gather the right documentation and take care of the queuing for you.",
-      variants: [
-        {
-          name: 'Application for a BRNC',
-          documents: [
-            "Clear copy of the company proxy's ID document (original size, not reduced)",
-            'Proof of company address (utility bill or bank statement), not older than 3 months — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "If the company operates from a home address: a letterhead stating the property owner's details, along with their ID copy and proof of address",
-            'Certificate of Incorporation (CIPC company registration) — CK1, CK2, or COR39',
-            "SARS document confirming the company's VAT number",
-            'Company letterhead stating that the company wishes to apply for a BRNC',
-            'A company letterhead nominating a proxy and representative, signed and agreed by both'
-          ],
-          forms: ['ABR – Application and Notice of Business Register Number'],
-          serviceFee: 'R1000',
-          feeLabel: 'Government + RenewGP fee',
-          processingTime: '1–4 days'
-        },
-        {
-          name: 'Application for a duplicate BRNC',
-          description: "If your vehicle is already registered in a company name, you'll need a duplicate BRNC instead — your existing BRNC number appears on your vehicle's RC1 (registration certificate).",
-          documents: [
-            "Clear copy of the company proxy's ID document (original size, not reduced)",
-            'Proof of company address (utility bill or bank statement), not older than 3 months — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "If the company operates from a home address: a letterhead stating the property owner's details, along with their ID copy and proof of address",
-            'Certificate of Incorporation (CIPC company registration) — CK1, CK2, or COR39',
-            "SARS document confirming the company's VAT number",
-            'Company letterhead stating that the company wishes to apply for a duplicate BRN certificate',
-            'Copy of the existing BRNC, if the company has one'
-          ],
-          forms: [
-            'ABR – Application and Notice of Business Register Number',
-            'DCT – Declaration in Respect of Lost Documents'
-          ],
-          serviceFee: 'R1000',
-          feeLabel: 'Government + RenewGP fee',
-          processingTime: '1–4 days'
-        }
-      ]
-    },
-    'deregistration': {
-      title: 'Deregistration & scrapping',
-      intro: "Every vehicle must be registered with your district licensing department — and if it's no longer roadworthy, or you'd like to use it purely as, say, a garden feature, it needs to be formally deregistered instead of just left off the road.",
-      variants: [
-        {
-          name: 'Standard deregistration / scrapping',
-          documents: [
-            "Police affidavit stating why the vehicle must be deregistered or scrapped, describing the vehicle's registration number, licence number, and chassis number",
-            'Original green Natis (RC1) / vehicle registration document',
-            "Copy of the owner's ID document",
-            'Photos of the scrapped vehicle',
-            'Proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
-          ],
-          forms: ['ADV – Application for Deregistration of Vehicle'],
-          serviceFee: 'R572',
-          feeLabel: 'Government + RenewGP fee',
-          processingTime: '4 days',
-          note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
-        },
-        {
-          name: 'Export — buyer unknown',
-          description: "A vehicle can't be deregistered if a new owner never completed the change of ownership. If that new owner has disappeared or can't be traced, an \"export — buyer unknown\" application is required instead.",
-          documents: [
-            "Police affidavit confirming the vehicle was sold — including the sale date and amount, and explaining that the new owner can't be located to complete the change of ownership. It must also describe the vehicle's registration number, licence number, and chassis number",
-            'Original green Natis (RC1)',
-            "Copy of the current owner's ID document (the person the vehicle was sold to)"
-          ],
-          forms: ['NCO – Notification of Change of Ownership / Sale'],
-          serviceFee: 'R572',
-          feeLabel: 'Government + RenewGP fee',
-          processingTime: '4 days',
-          note: 'Outstanding licence fees and any fines on this vehicle must be fully settled up to the date of deregistration before we can proceed.'
-        }
-      ]
-    },
-    'trade-plates': {
-      title: 'Trade plates',
-      intro: 'Trade plates let registered manufacturers, builders, importers, motor transport contractors, motor dealers, and financial institutions legally operate an unregistered or unlicensed vehicle on public roads. Before applying for trade plates, you\u2019ll need a motor trade permit number in place.',
-      variants: [
-        {
-          documents: [
-            'BRNC certificate',
-            "Company proxy's ID document copy (original size, not reduced)",
-            'Signed affidavit, completed in person at our offices'
-          ],
-          forms: ['MTN1 – Application and Notice i.r.o. Motor Trade Number and Blank Temporary Permits'],
-          govFee: ['R876 – Licensing department fee'],
-          serviceFee: 'R500',
-          processingTime: '5 days'
-        }
-      ]
-    },
-    'dealer-stocking': {
-      title: 'Dealer stocking',
-      intro: 'The National Road Traffic Act defines a motor dealer as any person or business engaged in buying, selling, or repairing vehicles, or building permanent structures onto them. Below is what\u2019s required to have a vehicle dealerstocked, along with what it costs.',
-      introCta: { text: 'Estimate the annual licence fee', href: '#estimate' },
-      variants: [
-        {
-          name: 'From private ownership to the company',
-          documents: [
-            'Original green Natis (RC1)',
-            "Previous owner's ID document copy (original size, not reduced)",
-            "New owner's BRNC document",
-            "Company proxy's ID document copy (original size, not reduced)"
-          ],
-          forms: [
-            'NCO – Notification of Change of Ownership / Sale — complete Section A (previous owner), Section B (new owner details), Section C (vehicle details)',
-            'RLV – Application for Registration & Licensing of Motor Vehicle — complete Sections A and C'
-          ],
-          govFee: ['R228 – Dealerstock fee'],
-          serviceFee: 'R500',
-          processingTime: '4 days',
-          note: "The annual licence fee (plus any penalties) may also apply on top of the fees above. No licence fee is charged if it's already up to date; a pro-rated fee applies if it's still valid; and if it's expired, monthly fees and penalties apply, plus the new annual fee. All licensing fees must be paid in full before a vehicle can be dealerstocked."
-        },
-        {
-          name: 'Directly from the company',
-          description: "If the vehicle is already registered in the company's own name and there's no change of ownership taking place, the previous-owner paperwork and NCO fall away — only the vehicle and company details are needed.",
-          documents: [
-            'Original green Natis (RC1)',
-            "Company's BRNC document",
-            "Company proxy's ID document copy (original size, not reduced)"
-          ],
-          forms: [
-            'RLV – Application for Registration & Licensing of Motor Vehicle — complete Sections A and C'
-          ],
-          govFee: ['R228 – Dealerstock fee'],
-          serviceFee: 'R500',
-          processingTime: '4 days',
-          note: "The annual licence fee (plus any penalties) may also apply on top of the fees above. No licence fee is charged if it's already up to date; a pro-rated fee applies if it's still valid; and if it's expired, monthly fees and penalties apply, plus the new annual fee. All licensing fees must be paid in full before a vehicle can be dealerstocked."
-        }
-      ]
-    },
-    'number-plates': {
-      title: 'Number plates',
-      intro: "We make standard number plates on-site within minutes. We also handle personalised plates — a registration of your own choosing, issued once you've applied and paid the required fee with the registering authority.",
-      variants: [
-        {
-          name: 'Standard number plates',
-          documents: [
-            'Vehicle original Natis / registration certificate (RC1)',
-            'Current vehicle licence disc (from your windscreen)'
-          ],
-          feeListLabel: 'Number plate pricing',
-          govFee: [
-            '440 x 113mm — R190 single / R380 set',
-            '520 x 113mm — R190 single / R380 set',
-            '250 x 205mm — R190 single',
-            '250 x 165mm — R190 single',
-            'Backing plates — R80'
-          ],
-          serviceFee: 'Included in the plate price above',
-          processingTime: '10–20 minutes, made on-site'
-        },
-        {
-          name: 'Personalised number plates',
-          documents: [
-            "Clear copy of the owner's ID document",
-            'Vehicle original Natis / registration certificate (RC1)',
-            "Clear copy of the company proxy's ID document (if a company vehicle or vehicle under finance)",
-            'Completed prescribed application forms, arranged through the registering authority'
-          ],
-          govFee: ['Set by the registering authority — confirmed when you apply'],
-          serviceFee: 'Ask us for current plate pricing',
-          processingTime: "Subject to the registering authority's processing time"
-        }
-      ]
-    },
-    'trn': {
-      title: 'Traffic register number',
-      notice: "<strong>We can't process this application for you.</strong> A Traffic Register Number (TRN) works like an ID document for an entity that isn't a legal person — such as a trust. We can help you gather the right documentation as a courtesy, but this application must be completed by you directly with the licensing department.",
-      variants: [
-        {
-          name: 'Individuals (natural persons)',
-          documents: [
-            'A valid foreign passport',
-            'A valid visa from Home Affairs',
-            'An original certified letter from your employer, study institution, or confirming general work',
-            'Registration documents, a Company Registration Certificate, or a Tax Clearance Certificate',
-            'An affidavit stating the reason for your application',
-            'Two ID-sized photographs',
-            'Proof of address (utility bill or bank statement), not older than 3 months — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "If the company operates from a home address: a letterhead stating the property owner's details, along with their ID copy and proof of address",
-            'Signed affidavit, completed in person at the licensing department'
-          ],
-          forms: ['ANR – Application and Notice of Traffic Register Number']
-        },
-        {
-          name: 'Application for a body of persons',
-          documents: [
-            'Company or organisation letterhead applying for the TRN, naming the appointed proxy and representative (include a proxy for each branch or office, if more than one)',
-            'Acceptable identification for the appointed representative(s) or proxy/proxies',
-            'Proof of address (utility bill or bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead',
-            "If the organisation operates from a home address: a letterhead stating the property owner's details, along with their ID copy and proof of address",
-            'Signed affidavit, completed in person at the licensing department'
-          ],
-          forms: ['ANR – Application and Notice of Traffic Register Number']
-        }
-      ]
-    },
-    'fines': {
-      title: 'Traffic fines',
-      intro: "We currently assist with AARTO fines only — outstanding notices issued under the Administrative Adjudication of Road Traffic Offences (AARTO) system. In many cases, we're able to negotiate up to 50% off the fine amount on your behalf. All we need from you is a copy of your ID.",
-      variants: [
-        {
-          documents: ['Copy of your identity document'],
-          serviceFee: 'Up to 50% off your fine amount',
-          processingTime: '7-21 days'
-        }
-      ]
-    },
-    'photos': {
-      title: "ID & learner's photos",
-      intro: "Correctly sized ID photos for learner's and driver's licence applications, smart ID cards, and passport applications — ready in minutes, no appointment needed. Bring your own photos on a USB, CF card, microdrive, or SD card, or we can take them for you on-site.",
-      variants: [
-        {
-          feeListLabel: 'Photo pricing',
-          govFee: [
-            'Standard 35x45mm, set of 6 — R75',
-            'Custom sizes (passport, visa, etc.) — R100'
-          ],
-          processingTime: 'A few minutes',
-          serviceFee: 'See pricing above'
-        }
-      ]
-    },
-    'double-disc': {
-      title: 'Double disc',
-      intro: "A \"double disc\" is a valid vehicle licence disc paired with a roadworthy certificate — the two documents e-hailing drivers (such as Uber and Bolt) are commonly asked to provide for their vehicle. RenewGP takes care of the paperwork and the queuing for you.",
-      variants: [
-        {
-          documents: [
-            'Clear copy of your ID document',
-            'Roadworthy certificate',
-            'Proof of address (utility bill or first page of a bank statement) — if the utility bill is not in your name, attach an affidavit from the account holder confirming you live there, plus a copy of their ID; if you live in an informal settlement, bring an officially date-stamped letter from your ward councillor confirming your address instead'
-          ],
-          serviceFee: 'R500',
-          feeLabel: 'Government + RenewGP fee',
-          processingTime: '1–4 days'
-        }
-      ]
-    },
-    'copies': {
-      title: 'Copies & lamination',
-      intro: 'Need documents copied or protected? We offer A4 black-and-white and colour copies, as well as A4 and A3 lamination.',
-      variants: [
-        {
-          feeListLabel: 'Pricing',
-          govFee: [
-            'A4 black-and-white copies — R2 per copy',
-            'A4 colour copies — R6.50 per copy',
-            'Bulk copying — enquire for a quote',
-            'A4 lamination — R14.50',
-            'A3 lamination — R19'
-          ]
-        }
-      ]
-    }
-  };
-
-  const modalOverlay = document.getElementById('service-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalBody = document.getElementById('modal-body');
-  const modalCloseBtn = document.getElementById('modal-close-btn');
-
-  function escapeHtml(str){
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
-  // Renders a documents/forms list. If a form entry starts with a known code
-  // (e.g. "ALV – Application for..."), that code+name becomes a link to the Forms page.
-  function renderList(items, linkable){
-    const rows = items.map(item => {
-      if(linkable){
-        const match = item.match(/^([A-Z0-9]+)(\s*[–-]\s*)(.+)$/);
-        if(match && FORM_LINKS[match[1]]){
-          const [, code, sep, rest] = match;
-          return `<li><a href="${FORM_LINKS[code]}">${escapeHtml(code)}${escapeHtml(sep)}${escapeHtml(rest)}</a></li>`;
-        }
-      }
-      return `<li>${escapeHtml(item)}</li>`;
-    }).join('');
-    return `<ul class="modal-list">${rows}</ul>`;
-  }
-
-  function renderVariant(variant, showTitle){
-    let html = '';
-    if(showTitle && variant.name){
-      html += `<div class="modal-variant-title">${escapeHtml(variant.name)}</div>`;
-    }
-    if(variant.description){
-      html += `<div class="modal-section"><p>${escapeHtml(variant.description)}</p></div>`;
-    }
-    if(variant.documents && variant.documents.length){
-      html += `<div class="modal-section"><div class="modal-label">Documents required</div>${renderList(variant.documents, false)}</div>`;
-    }
-    if(variant.forms && variant.forms.length){
-      html += `<div class="modal-section"><div class="modal-label">Forms required</div>${renderList(variant.forms, true)}<p style="font-size:0.82rem; color:#8a8d97; margin-top:6px;">We have these forms available in-store — feel free to bring your own completed copy instead if you prefer.</p></div>`;
-    }
-    if(variant.govFee){
-      const feeLabel = variant.feeListLabel || 'Government authority fee';
-      html += `<div class="modal-section"><div class="modal-label">${escapeHtml(feeLabel)}</div>${renderList(variant.govFee, false)}</div>`;
-    }
-    if(variant.serviceFee || variant.processingTime){
-      html += `<div class="modal-summary">
-        <div class="modal-summary-item"><div class="amt">${escapeHtml(variant.serviceFee || '—')}</div><div class="lbl">${escapeHtml(variant.feeLabel || 'RenewGP service fee')}</div></div>
-        <div class="modal-summary-item"><div class="amt">${escapeHtml(variant.processingTime || '—')}</div><div class="lbl">Processing time</div></div>
-      </div>`;
-    }
-    if(variant.note){
-      html += `<div class="modal-alert">${escapeHtml(variant.note)}</div>`;
-    }
-    return html;
-  }
-
-  function openServiceModal(key){
-    const data = SERVICE_DETAILS[key];
-    if(!data) return;
-    modalTitle.textContent = data.title;
-
-    let html = '';
-    if(data.notice){
-      html += `<div class="modal-alert">${data.notice}</div>`;
-    }
-    if(data.intro){
-      html += `<p class="modal-intro">${escapeHtml(data.intro)}</p>`;
-    }
-    if(data.introCta){
-      html += `<a href="${data.introCta.href}" class="modal-intro-cta">${escapeHtml(data.introCta.text)} →</a>`;
-    }
-    const showVariantTitles = data.variants.length > 1;
-    data.variants.forEach(variant => {
-      html += renderVariant(variant, showVariantTitles);
-    });
-    modalBody.innerHTML = html;
-
-    modalOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeServiceModal(){
-    modalOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', () => openServiceModal(btn.dataset.service));
-  });
-  modalCloseBtn.addEventListener('click', closeServiceModal);
-  modalOverlay.addEventListener('click', (e) => {
-    if(e.target === modalOverlay) closeServiceModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeServiceModal();
-  });
 
   // ---------- LICENCE ESTIMATE CALCULATOR ----------
   // Gauteng tare-based tariffs are now sourced directly from the dropdown option values
@@ -1790,6 +1119,8 @@
 </script>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ead145842f3243ecb1f7e72a20333ebd"}'></script><!-- End Cloudflare Web Analytics -->
+
+<script src="legal.js" defer></script>
 
 </body>
 </html>

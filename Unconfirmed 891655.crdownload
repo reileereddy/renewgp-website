@@ -1,0 +1,97 @@
+/* RenewGP – licence disc estimate calculator (used on the licence disc renewal page) */
+(function(){
+  // ---------- LICENCE ESTIMATE CALCULATOR ----------
+  // Gauteng tare-based tariffs are now sourced directly from the dropdown option values
+  // in the HTML above (id="est-tare") — effective 1 April 2025, Gauteng Provincial Gazette 292.
+  // Update those <option> values if/when Gauteng's rates change (a draft increase was
+  // published for comment on 5 Aug 2026 but is not yet law).
+  const GAUTENG_MOTORCYCLE_FEE = 252;
+  const GAUTENG_CARAVAN_FEE = 420;
+  const RTMC_TRANSACTION_FEE = 72;
+  const GRACE_PERIOD_DAYS = 21;
+
+  function zarFormat(n){
+    return 'R' + Math.round(n).toLocaleString('en-ZA');
+  }
+
+  function getGautengFee(vehicleType, selectedFeeValue){
+    if (vehicleType === 'motorcycle') return GAUTENG_MOTORCYCLE_FEE;
+    if (vehicleType === 'caravan') return GAUTENG_CARAVAN_FEE;
+    const fee = Number(selectedFeeValue);
+    return Number.isFinite(fee) && fee > 0 ? fee : null;
+  }
+
+  // Regulation 60: 21-day grace period from the day after expiry.
+  // Regulation 57: penalty = 10% of the fee per month or part-month unpaid, capped at 100%.
+  // Regulation 59: arrears = 1/12 of the annual fee per month the vehicle went unlicensed.
+  function calculateLateFees(annualFee, expiryDate, today){
+    const liabilityDate = new Date(expiryDate);
+    liabilityDate.setDate(liabilityDate.getDate() + 1);
+    const graceEnd = new Date(liabilityDate);
+    graceEnd.setDate(graceEnd.getDate() + GRACE_PERIOD_DAYS);
+
+    if (today <= graceEnd){
+      return { arrears: 0, penalty: 0, monthsOverdue: 0 };
+    }
+
+    // Calendar-accurate month count (avoids 30-day rounding errors across real months).
+    const rawMonths = (today.getFullYear() - expiryDate.getFullYear()) * 12
+                     + (today.getMonth() - expiryDate.getMonth());
+    const isPartialMonth = today.getDate() > expiryDate.getDate();
+    const monthsOverdue = Math.max(1, rawMonths + (isPartialMonth ? 1 : 0)); // Reg 57: includes part-month
+    const arrearsMonths = Math.max(0, rawMonths); // Reg 59: full completed months only
+
+    const arrears = (annualFee / 12) * arrearsMonths;
+    const penalty = Math.min(annualFee, annualFee * 0.10 * monthsOverdue); // capped at 100% (Reg 57)
+
+    return { arrears, penalty, monthsOverdue };
+  }
+
+  const estType = document.getElementById('est-type');
+  const estTareField = document.getElementById('tare-field');
+  if (estType){
+    estType.addEventListener('change', () => {
+      estTareField.style.display = estType.value === 'light' ? 'block' : 'none';
+    });
+  }
+
+  const estCalcBtn = document.getElementById('est-calc-btn');
+  if (estCalcBtn){
+    estCalcBtn.addEventListener('click', () => {
+      const vehicleType = estType.value;
+      const tare = document.getElementById('est-tare').value;
+      const expiryInput = document.getElementById('est-expiry').value;
+
+      if (vehicleType === 'light' && !tare){
+        alert('Please select your vehicle\'s weight bracket.');
+        return;
+      }
+      if (!expiryInput){
+        alert('Please select your licence expiry date.');
+        return;
+      }
+
+      const annualFee = getGautengFee(vehicleType, tare);
+      if (annualFee === null){
+        alert('This vehicle is heavier than this calculator currently covers (12,000kg+). Please contact RenewGP directly for a quote.');
+        return;
+      }
+
+      const expiryDate = new Date(expiryInput + 'T00:00:00');
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      const { arrears, penalty } = calculateLateFees(annualFee, expiryDate, today);
+      const total = annualFee + arrears + penalty + RTMC_TRANSACTION_FEE;
+
+      document.getElementById('est-fee').textContent = zarFormat(annualFee);
+      document.getElementById('est-arrears').textContent = zarFormat(arrears);
+      document.getElementById('est-penalty').textContent = zarFormat(penalty);
+      document.getElementById('est-rtmc').textContent = zarFormat(RTMC_TRANSACTION_FEE);
+      document.getElementById('est-total').textContent = zarFormat(total);
+
+      document.getElementById('est-placeholder').style.display = 'none';
+      document.getElementById('est-breakdown').style.display = 'block';
+    });
+  }
+})();
