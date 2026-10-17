@@ -195,7 +195,42 @@
 <footer><div class="wrap footer-row"><div>&copy; <span id="year"></span> RenewGP. All rights reserved.</div>
 <div class="footer-links"><a href="/#services">Services</a><a href="renewgp-forms.html">Forms</a><a href="/#contact">Contact</a>
 <a href="/#privacy" data-legal="privacy">Privacy Policy</a><a href="/#terms" data-legal="terms">Terms and Conditions</a></div></div></footer>
-<script src="service.js" defer></script>
+<script>
+(function(){
+  var y = document.getElementById('year');
+  if(y){ y.textContent = new Date().getFullYear(); }
+
+  var menuBtn = document.getElementById('menuBtn');
+  var navlinks = document.getElementById('navlinks');
+  if(menuBtn && navlinks){
+    menuBtn.addEventListener('click', function(){
+      var isOpen = navlinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen);
+    });
+    navlinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ navlinks.classList.remove('open'); });
+    });
+  }
+
+  var bar = document.getElementById('announceBar');
+  if(bar){
+    var OPENING_DATE = new Date('2026-10-16T00:00:00');
+    var dismissed = null;
+    try { dismissed = localStorage.getItem('renewgp_announce_dismissed'); } catch(e) {}
+    if(new Date() >= OPENING_DATE || dismissed){
+      bar.style.display = 'none';
+    } else {
+      var close = document.getElementById('announceClose');
+      if(close){
+        close.addEventListener('click', function(){
+          bar.style.display = 'none';
+          try { localStorage.setItem('renewgp_announce_dismissed', '1'); } catch(e) {}
+        });
+      }
+    }
+  }
+})();
+</script>
 
 <script src="legal.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ead145842f3243ecb1f7e72a20333ebd"}'></script><!-- End Cloudflare Web Analytics -->

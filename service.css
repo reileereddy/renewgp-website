@@ -249,13 +249,15 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,0.6);padding:36px 0;fo
 .footer-links{display:flex;gap:22px;flex-wrap:wrap;}
 
 /* ---------- REVEAL ON SCROLL (progressive enhancement) ---------- */
-.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
-.js .reveal.in{opacity:1;transform:none;}
+.reveal{animation:revealUp .6s ease both;}
+.glance-grid .g-card:nth-child(2){animation-delay:.08s;}
+.glance-grid .g-card:nth-child(3){animation-delay:.16s;}
+@keyframes revealUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   .s-art svg{animation:none;}
-  .js .reveal{opacity:1;transform:none;transition:none;}
+  .reveal{animation:none;}
   .btn,.rel-card,.rel-body .arrow{transition:none;}
 }
 
