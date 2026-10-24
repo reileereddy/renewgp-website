@@ -916,7 +916,7 @@
           <div class="breakdown-row"><span>Late penalty</span><span id="est-penalty">R0</span></div>
           <div class="breakdown-row"><span>RTMC transaction fee</span><span id="est-rtmc">R72</span></div>
           <div class="breakdown-row total"><span>Estimated government total</span><span id="est-total">R0</span></div>
-          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
+          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. It can also be lower if your new licence is issued for fewer than 12 months, because the fee is then pro-rated. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
           <div class="estimator-cta">
             <a href="#contact" class="btn btn-outline" style="width:100%;">Let RenewGP handle it →</a>
           </div>
@@ -1022,9 +1022,12 @@
   const RTMC_TRANSACTION_FEE = 72;
   const GRACE_PERIOD_DAYS = 21;
 
+  // Shown to the cent, exactly like the eNaTIS quotation (e.g. R1 390.80).
   function zarFormat(n){
-    return 'R' + Math.round(n).toLocaleString('en-ZA');
+    const parts = (Math.round(n * 100) / 100).toFixed(2).split('.');
+    return 'R' + parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0') + '.' + parts[1];
   }
+  function toCents(n){ return Math.round(n * 100) / 100; }
 
   function getGautengFee(vehicleType, selectedFeeValue){
     if (vehicleType === 'motorcycle') return GAUTENG_MOTORCYCLE_FEE;
@@ -1033,12 +1036,18 @@
     return Number.isFinite(fee) && fee > 0 ? fee : null;
   }
 
-  // Regulation 60: 21-day grace period from the day after expiry.
-  // Regulation 57: penalty = 10% of the fee per month or part-month unpaid, capped at 100%.
-  // Regulation 59: arrears = 1/12 of the annual fee per month the vehicle went unlicensed.
+  // How the late fees are worked out (National Road Traffic Regulations, 2000):
+  //  - Reg 23(1): liability for the next licence arises on the first day of the month AFTER the expiry date.
+  //  - Reg 23(3) / 60: a 21-day grace period after that liability date (no penalty, no arrears).
+  //  - Reg 59(1): arrears = 1/12 of the annual fee for every month from the first day of the month in which
+  //    liability arose until the last day of the month BEFORE the month of payment.
+  //  - Reg 57(1): penalty = 1/10 of the fee for every month or part of a month the fees remain unpaid, but
+  //    never more than the total amount of the appropriate fees (licence fee + arrears).
+  // Cross-checked against real eNaTIS quotations (24 Oct 2026): a pick-up on a R528 fee, expired 2026-06-30 and paid
+  // 2026-10-23, was quoted arrears R132.00 + penalty R211.20, matching this logic to the cent; and a R732 fee paid
+  // 11 months after expiry was quoted R671.00 arrears, with a penalty above 100% of one year's fee (no 1-year cap).
   function calculateLateFees(annualFee, expiryDate, today){
-    const liabilityDate = new Date(expiryDate);
-    liabilityDate.setDate(liabilityDate.getDate() + 1);
+    const liabilityDate = new Date(expiryDate.getFullYear(), expiryDate.getMonth() + 1, 1);
     const graceEnd = new Date(liabilityDate);
     graceEnd.setDate(graceEnd.getDate() + GRACE_PERIOD_DAYS);
 
@@ -1046,17 +1055,16 @@
       return { arrears: 0, penalty: 0, monthsOverdue: 0 };
     }
 
-    // Calendar-accurate month count (avoids 30-day rounding errors across real months).
-    const rawMonths = (today.getFullYear() - expiryDate.getFullYear()) * 12
-                     + (today.getMonth() - expiryDate.getMonth());
-    const isPartialMonth = today.getDate() > expiryDate.getDate();
-    const monthsOverdue = Math.max(1, rawMonths + (isPartialMonth ? 1 : 0)); // Reg 57: includes part-month
-    const arrearsMonths = Math.max(0, rawMonths); // Reg 59: full completed months only
+    const monthIndex = d => d.getFullYear() * 12 + d.getMonth();
+    const monthsSinceLiability = monthIndex(today) - monthIndex(liabilityDate);
+
+    const arrearsMonths = Math.max(0, monthsSinceLiability);   // Reg 59: whole months before the month of payment
+    const penaltyMonths = Math.max(1, monthsSinceLiability + (today.getDate() > 1 ? 1 : 0)); // Reg 57: month or part of a month
 
     const arrears = (annualFee / 12) * arrearsMonths;
-    const penalty = Math.min(annualFee, annualFee * 0.10 * monthsOverdue); // capped at 100% (Reg 57)
+    const penalty = Math.min(annualFee * 0.10 * penaltyMonths, annualFee + arrears); // Reg 57 proviso: not more than the total fees
 
-    return { arrears, penalty, monthsOverdue };
+    return { arrears, penalty, monthsOverdue: penaltyMonths };
   }
 
   const estType = document.getElementById('est-type');
@@ -1066,6 +1074,18 @@
       estTareField.style.display = estType.value === 'light' ? 'block' : 'none';
     });
   }
+
+  // If the visitor changes anything, clear the old result so a stale total is never left on screen.
+  ['est-type', 'est-tare', 'est-expiry'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    ['change', 'input'].forEach(function(evt){
+      el.addEventListener(evt, function(){
+        document.getElementById('est-breakdown').style.display = 'none';
+        document.getElementById('est-placeholder').style.display = 'block';
+      });
+    });
+  });
 
   const estCalcBtn = document.getElementById('est-calc-btn');
   if (estCalcBtn){
@@ -1094,7 +1114,7 @@
       today.setHours(0,0,0,0);
 
       const { arrears, penalty } = calculateLateFees(annualFee, expiryDate, today);
-      const total = annualFee + arrears + penalty + RTMC_TRANSACTION_FEE;
+      const total = toCents(annualFee) + toCents(arrears) + toCents(penalty) + RTMC_TRANSACTION_FEE;   // the parts shown always add up to the total shown
 
       document.getElementById('est-fee').textContent = zarFormat(annualFee);
       document.getElementById('est-arrears').textContent = zarFormat(arrears);
@@ -1120,7 +1140,98 @@
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ead145842f3243ecb1f7e72a20333ebd"}'></script><!-- End Cloudflare Web Analytics -->
 
-<script src="legal.js" defer></script>
+<!-- legal-popup -->
+<script>
+/* RenewGP – Privacy Policy and Terms & Conditions, shown as pop-ups.
+   Loaded by index.html and renewgp-forms.html. Any link with data-legal="privacy"
+   or data-legal="terms" opens the matching pop-up. The address renewgp.co.za/#privacy
+   (or /#terms) also opens it directly. */
+(function(){
+  var DOCS = {
+  "privacy": {
+    "title": "Privacy Policy",
+    "sub": "How we handle your personal information, in line with South Africa's Protection of Personal Information Act (POPIA).",
+    "html": "    <h2>1. Who we are</h2>\n    <p>RenewGP (\"we\", \"us\", \"our\", \"the Company\") is a vehicle licensing and registration services business based at Shop 4, 11 Finch St, Atlasville, Boksburg, 1459, South Africa. We can be contacted at renewgp.info@gmail.com, +27 64 034 8539, or +27 74 297 2420.</p>\n    <p>This Privacy Policy applies to our website (renewgp.co.za) and to the services we provide to you in person, telephonically, via WhatsApp, or by email. By using our services or this website, you agree to the terms of this Privacy Policy. If you do not agree with any part of it, please do not use our services or continue browsing this website.</p>\n\n    <h2>2. Who this policy applies to</h2>\n    <p>This policy applies to:</p>\n    <ul>\n      <li>anyone who visits our website; and</li>\n      <li>anyone who engages us as a customer to carry out a vehicle licensing, registration, or related service.</li>\n    </ul>\n\n    <h2>3. Definitions</h2>\n    <ul>\n      <li><strong>Personal Information</strong> means information relating to an identifiable, living natural person, or an identifiable existing juristic person (such as a company), as defined in the Protection of Personal Information Act 4 of 2013 (POPIA).</li>\n      <li><strong>Processing</strong> means anything done with personal information — including collecting, recording, storing, using, sharing, or destroying it — as defined in POPIA.</li>\n      <li><strong>You</strong> or <strong>the customer</strong> means any person who uses our services or accesses our website, including someone acting on behalf of another person or an organisation.</li>\n      <li><strong>Service Provider</strong> means any third party we may use to help deliver our services (for example, a courier, or the relevant government licensing authority).</li>\n      <li><strong>Website</strong> means renewgp.co.za.</li>\n    </ul>\n\n    <h2>4. Legal capacity and minors</h2>\n    <p>Our services are intended for use by adults (18 years or older) or by a parent/legal guardian acting on behalf of a minor. Some of our services — such as ID and learner's licence photos — are commonly used by minors applying for a learner's licence. Where a minor's personal information is provided to us, we will treat this as having been provided with the knowledge and consent of that minor's parent or legal guardian, and it is the responsibility of the accompanying adult to ensure they are authorised to provide that consent.</p>\n\n    <h2>5. Your obligations when sharing information with us</h2>\n    <p>You may only give us personal information about yourself, or about another person where you have that person's permission to do so (for example, submitting documents on behalf of a family member or an employer). By providing us with someone else's personal information, you confirm that you are authorised to share it with us for the purpose of the service being requested.</p>\n\n    <h2>6. Information we collect</h2>\n    <p>Depending on the service you request, we may collect:</p>\n    <ul>\n      <li><strong>Identifying information</strong> — your full name, ID number, date of birth, or Traffic Register Number</li>\n      <li><strong>Contact information</strong> — your phone number, email address, or WhatsApp number</li>\n      <li><strong>Address information</strong> — your physical or postal address</li>\n      <li><strong>Vehicle and document information</strong> — vehicle registration numbers, VIN/chassis numbers, NaTIS records, and copies of related certificates or forms</li>\n      <li><strong>Payment reference information</strong> — where fees are paid via EFT or bank transfer, we may see the proof of payment or reference details associated with that transaction. We do not store full banking card details, and we do not process online card payments through this website.</li>\n    </ul>\n    <p>We collect this information directly from you — in person, via WhatsApp, phone, or email — when you request a service from us. We do not collect personal information through this website itself — there is no account registration or contact form. The only automatic measurement is the cookie-free visitor analytics described in section 12.</p>\n\n    <h2>7. How we use your information</h2>\n    <p>We use your personal information to:</p>\n    <ul>\n      <li>provide the specific service you've requested, including preparing and submitting applications, renewals, or notifications to the relevant licensing authority (such as the RTMC or Gauteng provincial licensing departments) on your behalf;</li>\n      <li>contact you regarding the progress, completion, or any issue with your request;</li>\n      <li>keep the records necessary to meet our own legal and administrative obligations; and</li>\n      <li>improve how we run our services.</li>\n    </ul>\n    <p>We do not use your personal information for direct marketing, and we do not sell, rent, or trade it to third parties.</p>\n\n    <h2>8. How we process your information</h2>\n    <p>In line with POPIA, we commit to the following when processing your personal information:</p>\n    <ul>\n      <li>We only collect personal information for a purpose connected to the service you've asked us to perform.</li>\n      <li>We only process personal information that is adequate and relevant for that purpose — we don't ask for more than we need.</li>\n      <li>We will not use your personal information for a different, unrelated purpose without your consent, unless required or permitted by law.</li>\n      <li>We keep records of what personal information was collected and why, for as long as reasonably necessary.</li>\n      <li>We securely destroy or delete personal information once it is no longer needed for the purpose it was collected for, or once our legal record-keeping obligations have been met.</li>\n    </ul>\n\n    <h2>9. Who we share your information with</h2>\n    <p>We only share your personal information in the following situations:</p>\n    <ul>\n      <li><strong>With licensing authorities:</strong> to complete your request, we share the necessary information with the relevant government department or authority, such as the RTMC or Gauteng provincial licensing offices.</li>\n      <li><strong>With service providers:</strong> where we use a third party to help deliver part of a service (for example, a courier), we only share what's necessary for them to carry out that task.</li>\n      <li><strong>For legal reasons:</strong> if required to do so by law, or in response to a valid request from a court, regulator, or government authority.</li>\n      <li><strong>With your consent:</strong> for any other purpose, only with your explicit permission.</li>\n    </ul>\n    <p>We do not share your personal information with third parties for their own marketing purposes.</p>\n\n    <h2>10. How long we keep your information</h2>\n    <p>We retain your personal information only for as long as necessary to complete your request and to meet any legal or record-keeping obligations that apply to our business, after which it is securely destroyed or deleted.</p>\n\n    <h2>11. Security of your information</h2>\n    <p>We take reasonable technical and organisational precautions to keep your documents and information secure, including limiting who has access to physical and digital copies of your documents, and disposing of documents securely once they are no longer needed. However, no method of storage or transmission (including over the internet, WhatsApp, or email) is 100% secure, and we cannot guarantee absolute security of information sent to us through these channels.</p>\n\n    <h2>12. Cookies and website tracking</h2>\n    <p>This website does not use cookies. We use Cloudflare Web Analytics, a privacy-focused tool that measures overall visitor numbers and which pages are viewed. It does not use cookies, and we do not use it to identify individual visitors. If we add cookies or other tracking technology in future, this policy will be updated and a cookie notice will be displayed on the site to obtain your consent where required.</p>\n\n    <h2>13. Links to other websites</h2>\n    <p>Our website may occasionally link to third-party websites or services. We have no control over, and accept no responsibility for, the privacy practices of any third-party website. We recommend reviewing the privacy policy of any external site you visit.</p>\n\n    <h2>14. Your rights under POPIA</h2>\n    <p>You have the right to:</p>\n    <ul>\n      <li>ask us what personal information we hold about you;</li>\n      <li>request that we correct inaccurate information;</li>\n      <li>request that we delete your information, subject to any legal retention requirements;</li>\n      <li>object to how your information is being used; and</li>\n      <li>lodge a complaint with the Information Regulator of South Africa if you believe your information has been mishandled.</li>\n    </ul>\n    <p>To exercise any of these rights, contact us at renewgp.info@gmail.com.</p>\n\n    <h2>15. Information Officer</h2>\n    <p>Any queries regarding this policy or your personal information can be directed to our Information Officer via renewgp.info@gmail.com.</p>\n\n    <h2>16. Changes to this policy</h2>\n    <p>We may update this policy from time to time, for example due to legal changes or changes in how we operate. Continuing to use our services or website after a revised policy is posted means you agree to the updated version. The current version was last updated on the date shown below.</p>\n    <p><em>Last updated: October 2026</em></p>"
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "sub": "The terms that apply when you use RenewGP's services or this website.",
+    "html": "    <h2>1. About RenewGP</h2>\n    <p>RenewGP is a vehicle licensing and registration services business based in Boksburg, Gauteng, South Africa. We assist customers with vehicle-related paperwork and services including licence disc renewals, double discs, vehicle registrations, change of ownership, change of address, BRNC certificates, deregistration and scrapping, trade plates, dealer stocking, number plates, AARTO traffic fines, ID and learner's photos, and copies and lamination. For duplicate Natis (RC1) certificates and Traffic Register Numbers we provide guidance and help you prepare your documents, but the application itself must be made by you directly with the licensing department.</p>\n    <p>By using our services or this website, you agree to the terms set out below.</p>\n\n    <h2>2. We are a facilitator, not a government department</h2>\n    <p>RenewGP is not a government entity. We act on your behalf to prepare, submit, and follow up on applications with the relevant licensing authorities, including the Road Traffic Management Corporation (RTMC) and Gauteng provincial licensing departments. Final approval, processing, and issuance of any licence, certificate, registration, or document remains solely at the discretion of the relevant government department.</p>\n\n    <h2>3. Fees</h2>\n    <p>Our service fees are separate from, and in addition to, any statutory government fees, licence fees, penalties, or arrears that may be payable. You will be informed of the applicable fees before we proceed with your request. The renewal cost calculator on our website provides an estimate only, based on published Gauteng tariffs — it is not an official quotation and actual amounts may differ based on your vehicle's official NaTIS record.</p>\n\n    <h2>4. Your responsibilities</h2>\n    <p>You are responsible for providing accurate, complete, and truthful information and documentation. RenewGP is not liable for delays, rejections, or additional costs that result from incorrect, incomplete, or fraudulent information or documents supplied by you.</p>\n\n    <h2>5. Turnaround times</h2>\n    <p>While we aim to process and submit your paperwork promptly, turnaround times are ultimately dependent on the relevant government department's own systems and processing times (including NaTIS), which are outside of our control. We do not guarantee specific completion dates.</p>\n\n    <h2>6. Cancellations and refunds</h2>\n    <p>If you cancel a request after we have already paid any government or statutory fees on your behalf, those amounts are non-refundable, as they are paid directly to the relevant authority. Refunds of our own service fee, where applicable, will be considered based on the work already completed at the time of cancellation.</p>\n\n    <h2>7. Limitation of liability</h2>\n    <p>To the extent permitted by law, RenewGP's liability for any claim relating to our services is limited to the amount of the service fee paid for that specific transaction. We are not liable for delays, losses, or damages caused by government departments, third-party systems (such as NaTIS or RTMC), or inaccurate information provided by you.</p>\n\n    <h2>8. Intellectual property</h2>\n    <p>The content, design, and branding of this website belong to RenewGP. Government forms made available for download on this site are official RTMC/NaTIS forms, provided for your convenience.</p>\n\n    <h2>9. Governing law</h2>\n    <p>These terms are governed by the laws of the Republic of South Africa.</p>\n\n    <h2>10. Changes to these terms</h2>\n    <p>We may update these terms from time to time. The current version was last updated on the date shown below.</p>\n    <p><em>Last updated: October 2026</em></p>\n\n    <h2>11. Contact us</h2>\n    <p>Questions about these terms can be sent to renewgp.info@gmail.com or +27 64 034 8539.</p>"
+  }
+};
+
+  var css = [
+    ".lg-overlay{position:fixed;inset:0;background:rgba(5,17,45,0.62);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000;}",
+    ".lg-overlay.open{display:flex;}",
+    ".lg-box{background:#fff;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;border-radius:6px;padding:38px 38px 30px;position:relative;border-top:4px solid var(--gold,#F5C542);box-shadow:0 24px 60px rgba(5,17,45,0.35);}",
+    ".lg-close{position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.6rem;line-height:1;color:#8a8d97;cursor:pointer;padding:6px;border-radius:50%;}",
+    ".lg-close:hover{color:var(--navy-deep,#052A63);background:var(--cream,#F6F3EA);}",
+    ".lg-box h3{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--navy-deep,#052A63);margin:0;padding-right:28px;}",
+    ".lg-sub{color:#6b6e78;font-size:0.88rem;margin:8px 0 20px;padding-bottom:18px;border-bottom:1px solid rgba(245,197,66,0.5);}",
+    ".lg-body h2{font-family:'Fraunces',serif;font-size:1.08rem;color:var(--navy-deep,#052A63);margin:26px 0 10px;}",
+    ".lg-body h2:first-child{margin-top:0;}",
+    ".lg-body p{color:#3c3f4a;font-size:0.93rem;line-height:1.65;margin:0 0 12px;}",
+    ".lg-body ul{color:#3c3f4a;font-size:0.93rem;line-height:1.6;margin:0 0 12px;padding-left:20px;}",
+    ".lg-body li{margin-bottom:6px;}",
+    "@media (max-width:560px){.lg-box{padding:30px 20px 24px;}}"
+  ].join("\n");
+  var style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  var overlay = document.createElement("div");
+  overlay.className = "lg-overlay";
+  overlay.id = "legal-modal";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-labelledby", "lg-title");
+  overlay.innerHTML = '<div class="lg-box"><button type="button" class="lg-close" aria-label="Close">&times;</button><h3 id="lg-title"></h3><p class="lg-sub"></p><div class="lg-body"></div></div>';
+  document.body.appendChild(overlay);
+
+  var box = overlay.querySelector(".lg-box");
+  var titleEl = overlay.querySelector("#lg-title");
+  var subEl = overlay.querySelector(".lg-sub");
+  var bodyEl = overlay.querySelector(".lg-body");
+  var closeBtn = overlay.querySelector(".lg-close");
+
+  function open(key){
+    var d = DOCS[key];
+    if(!d) return;
+    titleEl.textContent = d.title;
+    subEl.textContent = d.sub;
+    bodyEl.innerHTML = d.html;
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    box.scrollTop = 0;
+    if(location.hash !== "#" + key){ history.replaceState(null, "", "#" + key); }
+    closeBtn.focus();
+  }
+
+  function close(){
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    var k = location.hash.replace("#", "");
+    if(DOCS[k]){ history.replaceState(null, "", location.pathname + location.search); }
+  }
+
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest("[data-legal]") : null;
+    if(!a) return;
+    e.preventDefault();
+    open(a.getAttribute("data-legal"));
+  });
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", function(e){ if(e.target === overlay) close(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && overlay.classList.contains("open")) close(); });
+
+  function fromHash(){
+    var k = location.hash.replace("#", "");
+    if(DOCS[k]) open(k);
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+})();
+</script>
 
 </body>
 </html>
