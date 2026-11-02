@@ -403,6 +403,24 @@
     border-left:2px solid var(--gold);
     padding-left:12px;
   }
+  .estimator-warning{
+    font-size:0.82rem;
+    color:#fff;
+    margin-top:16px;
+    background:rgba(245,197,66,0.14);
+    border-left:3px solid var(--gold);
+    padding:10px 12px;
+    border-radius:0 6px 6px 0;
+  }
+  .estimator-info{
+    font-size:0.82rem;
+    color:rgba(255,255,255,0.9);
+    margin-top:16px;
+    background:rgba(255,255,255,0.07);
+    border-left:3px solid var(--gold-light);
+    padding:10px 12px;
+    border-radius:0 6px 6px 0;
+  }
   .estimator-cta{
     margin-top:18px;
     text-align:center;
@@ -792,9 +810,9 @@
   </div>
   <div class="wrap services-wrap">
     <div class="services-grid">
-      <a class="service-btn" href="vehicle-registration.html"><h3>Vehicle registration</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="vehicle-registration.html"><div><h3>Vehicle registration</h3><span class="service-subnote">Done with a licence disc renewal</span></div><span class="arrow">→</span></a>
       <a class="service-btn" href="licence-disc-renewal.html"><h3>Vehicle license disc renewal</h3><span class="arrow">→</span></a>
-      <a class="service-btn" href="change-of-ownership.html"><h3>Change of ownership</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="change-of-ownership.html"><div><h3>Change of ownership</h3><span class="service-subnote">Done with a licence disc renewal</span></div><span class="arrow">→</span></a>
       <a class="service-btn" href="change-of-address.html"><h3>Change of address</h3><span class="arrow">→</span></a>
       <a class="service-btn" href="traffic-fines.html"><h3>Traffic fines</h3><span class="arrow">→</span></a>
       <a class="service-btn" href="duplicate-natis.html"><div><h3>Duplicate Natis</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></a>
@@ -804,7 +822,7 @@
       <a class="service-btn" href="dealer-stocking.html"><h3>Dealer stocking</h3><span class="arrow">→</span></a>
       <a class="service-btn" href="number-plates.html"><h3>Number plates</h3><span class="arrow">→</span></a>
       <a class="service-btn" href="traffic-register-number.html"><div><h3>Traffic register number</h3><span class="service-subnote">Assistance only — not submitted by us</span></div><span class="arrow">→</span></a>
-      <a class="service-btn" href="double-disc.html"><h3>Double disc</h3><span class="arrow">→</span></a>
+      <a class="service-btn" href="double-disc.html"><div><h3>Double disc</h3><span class="service-subnote">Done with a licence disc renewal</span></div><span class="arrow">→</span></a>
       <a class="service-btn" href="copies-lamination.html"><h3>Copies &amp; lamination</h3><span class="arrow">→</span></a>
       <a class="service-btn" href="id-learners-photos.html"><h3>ID &amp; learner's photos</h3><span class="arrow">→</span></a>
     </div>
@@ -902,7 +920,7 @@
 
         <label for="est-expiry">Licence expiry date</label>
         <input id="est-expiry" type="date">
-        <div class="hint">If it hasn't expired yet, pick the upcoming expiry date.</div>
+        <div class="hint">Use the expiry date printed on your disc, even if it hasn't expired yet.</div>
 
         <button class="btn btn-primary" id="est-calc-btn" type="button">Calculate my estimate</button>
       </div>
@@ -911,12 +929,14 @@
         <h3>Your estimated renewal cost</h3>
         <p class="placeholder" id="est-placeholder">Fill in your vehicle details to see a breakdown here.</p>
         <div id="est-breakdown" style="display:none;">
-          <div class="breakdown-row"><span>Annual licence fee</span><span id="est-fee">R0</span></div>
+          <div class="breakdown-row"><span id="est-fee-label">Annual licence fee</span><span id="est-fee">R0</span></div>
           <div class="breakdown-row"><span>Arrears</span><span id="est-arrears">R0</span></div>
           <div class="breakdown-row"><span>Late penalty</span><span id="est-penalty">R0</span></div>
           <div class="breakdown-row"><span>RTMC transaction fee</span><span id="est-rtmc">R72</span></div>
-          <div class="breakdown-row total"><span>Estimated government total</span><span id="est-total">R0</span></div>
-          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. It can also be lower if your new licence is issued for fewer than 12 months, because the fee is then pro-rated. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
+          <div class="breakdown-row total"><span id="est-total-label">Estimated government total</span><span id="est-total">R0</span></div>
+          <p class="estimator-info" id="est-early-note" style="display:none;"></p>
+          <p class="estimator-warning" id="est-old-warning" style="display:none;"><strong>Expired before 1 April 2025?</strong> eNaTIS prices each older month at the lower fee that applied back then, so your real arrears and penalty will usually come out lower than this estimate. Ask us to run the exact quote.</p>
+          <p class="estimator-note">This is an estimate based on the current published Gauteng tariff schedule and the National Road Traffic Regulations. Your actual amount is confirmed against your vehicle's official eNaTIS record and may differ if there are outstanding fines, roadworthy requirements, or other admin marks. It can also differ if your licence is issued for a shorter period than usual, because the fee is then pro-rated. RenewGP does not have direct access to NaTIS and this figure is not an official government quotation. RenewGP's own service fee is not included above — ask us for a quote.</p>
           <div class="estimator-cta">
             <a href="#contact" class="btn btn-outline" style="width:100%;">Let RenewGP handle it →</a>
           </div>
@@ -1021,6 +1041,10 @@
   const GAUTENG_CARAVAN_FEE = 420;
   const RTMC_TRANSACTION_FEE = 72;
   const GRACE_PERIOD_DAYS = 21;
+  // Start of the tariff year the fees in this calculator belong to (Gauteng schedule effective 1 April 2025).
+  // eNaTIS prices each OLDER month of arrears at the lower fee that applied back then (confirmed on a real quote),
+  // so for discs that expired before this date the calculator over-estimates. Update this date when a new schedule takes effect.
+  const CURRENT_TARIFF_START = new Date(2025, 3, 1);
 
   // Shown to the cent, exactly like the eNaTIS quotation (e.g. R1 390.80).
   function zarFormat(n){
@@ -1067,6 +1091,18 @@
     return { arrears, penalty, monthsOverdue: penaltyMonths };
   }
 
+  // Early renewal: while the disc is still valid, eNaTIS only issues a licence up to 12 months from the MONTH OF PAYMENT
+  // (ending on the last day of the month 11 months later) and charges the annual fee x months added / 12.
+  // This fits three real eNaTIS quotes exactly: 4 months (R152 on R456), 1 month (R107 on R1284), 10 months (R920 on R1104).
+  // Not yet confirmed against eNaTIS: a disc that expires in the same month it is renewed.
+  function earlyRenewal(expiryDate, today){
+    const monthIndex = d => d.getFullYear() * 12 + d.getMonth();
+    const newEnd = new Date(today.getFullYear(), today.getMonth() + 12, 0);       // last day of the month 11 months after this one
+    return { monthsAdded: Math.max(0, monthIndex(newEnd) - monthIndex(expiryDate)), newEnd };
+  }
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function fmtDate(d){ return d.getDate() + ' ' + MONTH_NAMES[d.getMonth()] + ' ' + d.getFullYear(); }
+
   const estType = document.getElementById('est-type');
   const estTareField = document.getElementById('tare-field');
   if (estType){
@@ -1076,13 +1112,16 @@
   }
 
   // If the visitor changes anything, clear the old result so a stale total is never left on screen.
+  const estPlaceholder = document.getElementById('est-placeholder');
+  const EST_PLACEHOLDER_DEFAULT = estPlaceholder ? estPlaceholder.textContent : '';
   ['est-type', 'est-tare', 'est-expiry'].forEach(function(id){
     var el = document.getElementById(id);
     if(!el) return;
     ['change', 'input'].forEach(function(evt){
       el.addEventListener(evt, function(){
         document.getElementById('est-breakdown').style.display = 'none';
-        document.getElementById('est-placeholder').style.display = 'block';
+        estPlaceholder.textContent = EST_PLACEHOLDER_DEFAULT;
+        estPlaceholder.style.display = 'block';
       });
     });
   });
@@ -1113,16 +1152,49 @@
       const today = new Date();
       today.setHours(0,0,0,0);
 
-      const { arrears, penalty } = calculateLateFees(annualFee, expiryDate, today);
-      const total = toCents(annualFee) + toCents(arrears) + toCents(penalty) + RTMC_TRANSACTION_FEE;   // the parts shown always add up to the total shown
+      // Licence still valid: only the extra months are charged (see earlyRenewal above).
+      const stillValid = expiryDate >= today;
+      let licenceFee = annualFee;
+      let monthsAdded = 12;
+      let newEnd = null;
+      if (stillValid){
+        const early = earlyRenewal(expiryDate, today);
+        monthsAdded = early.monthsAdded;
+        newEnd = early.newEnd;
+        if (monthsAdded === 0){
+          estPlaceholder.textContent = 'Your licence already runs to ' + fmtDate(expiryDate) + ', which is as far ahead as eNaTIS issues a licence right now, so there is nothing to pay yet.';
+          estPlaceholder.style.display = 'block';
+          document.getElementById('est-breakdown').style.display = 'none';
+          return;
+        }
+        licenceFee = annualFee * monthsAdded / 12;
+      }
 
-      document.getElementById('est-fee').textContent = zarFormat(annualFee);
+      const { arrears, penalty, monthsOverdue } = calculateLateFees(annualFee, expiryDate, today);
+      const total = toCents(licenceFee) + toCents(arrears) + toCents(penalty) + RTMC_TRANSACTION_FEE;   // the parts shown always add up to the total shown
+
+      document.getElementById('est-fee').textContent = zarFormat(licenceFee);
+      document.getElementById('est-fee-label').textContent = stillValid ? 'Licence fee (' + monthsAdded + ' of 12 months)' : 'Annual licence fee';
+      const earlyNote = document.getElementById('est-early-note');
+      if (stillValid){
+        earlyNote.textContent = 'Your disc is still valid, so eNaTIS only charges for the extra months: ' + monthsAdded + (monthsAdded === 1 ? ' month' : ' months') +
+          ' added to your current expiry, taking your licence to ' + fmtDate(newEnd) + '. The final period is confirmed when it is processed.';
+        earlyNote.style.display = 'block';
+      } else {
+        earlyNote.style.display = 'none';
+      }
       document.getElementById('est-arrears').textContent = zarFormat(arrears);
       document.getElementById('est-penalty').textContent = zarFormat(penalty);
       document.getElementById('est-rtmc').textContent = zarFormat(RTMC_TRANSACTION_FEE);
       document.getElementById('est-total').textContent = zarFormat(total);
 
-      document.getElementById('est-placeholder').style.display = 'none';
+      // discs that expired before the current tariff year: part of the arrears is priced at older, lower fees
+      const liabilityDate = new Date(expiryDate.getFullYear(), expiryDate.getMonth() + 1, 1);
+      const usesOlderTariffs = monthsOverdue > 0 && liabilityDate < CURRENT_TARIFF_START;
+      document.getElementById('est-old-warning').style.display = usesOlderTariffs ? 'block' : 'none';
+      document.getElementById('est-total-label').textContent = usesOlderTariffs ? 'Estimated government total (likely lower)' : 'Estimated government total';
+
+      estPlaceholder.style.display = 'none';
       document.getElementById('est-breakdown').style.display = 'block';
     });
   }
